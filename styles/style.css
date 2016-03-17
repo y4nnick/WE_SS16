@@ -1,0 +1,90 @@
+main { display: flex; }
+main > article { order: 2; min-width: 12em; flex: 1; }
+main > aside {
+    order: 3;
+    width: 300px;
+    border-left: 1px solid #A1A1A1;
+}
+@media all and (max-width: 600px) {
+    main { flex-flow: column; }
+    main > article, main > nav, main > aside {
+        order: 0; width: auto;
+    }
+}
+
+body{
+    margin:0em;
+    font-family: Arial;
+}
+
+
+/* Header Stuff */
+
+header {
+    height: 5em;
+    margin: 0em;
+    padding: 0em;
+    background: -webkit-linear-gradient(#F97500, #cc3407);
+    background: -o-linear-gradient(#F97500, #cc3407);
+    background: -moz-linear-gradient(#F97500, #cc3407);
+    background: linear-gradient(#F97500, #cc3407);
+
+    -webkit-box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
+    box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
+}
+
+header > img {
+    margin: 15px;
+}
+
+header > div{
+    display: inline;
+   /* TODO: center vertical */
+}
+
+
+/* Articles Stuff */
+
+article{
+    margin: 10px;
+}
+
+article > h1{
+    font-weight: bold;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+article > div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+article > div > div{
+    margin: 1em;
+    width: 250px;
+    height:350px;
+
+    -webkit-box-shadow: 1px 0px 15px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow:    1px 0px 15px 0px rgba(0,0,0,0.6);
+    box-shadow:         1px 0px 15px 0px rgba(0,0,0,0.6);
+
+    border: 1px solid #A1A1A1;
+    border-radius: 5px;
+}
+
+article > div > div:hover{
+    -webkit-box-shadow: 1px 0px 15px 0px rgb(237, 121, 15);
+    -moz-box-shadow:    1px 0px 15px 0px rgb(237, 121, 15);
+    box-shadow:         1px 0px 15px 0px rgb(237, 121, 15);
+}
+
+article > div > div > img{
+    width: 100%;
+
+    -webkit-border-radius:  4px 4px 0px 0px;
+    -moz-border-radius:     4px 4px 0px 0px;
+    border-radius:          4px 4px 0px 0px;
+}
