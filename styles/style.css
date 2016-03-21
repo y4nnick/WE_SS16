@@ -139,3 +139,6 @@ aside > div{
     padding-left: 10px;
 }
 
+#registration input {
+    background-color: green;
+}
