@@ -139,6 +139,35 @@ aside > div{
     padding-left: 10px;
 }
 
-#registration input {
-    background-color: green;
+#registration{
+    background-color: aqua;
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+
 }
+
+#registration label{
+    display:block;
+    float:left;
+    width:200px;
+    margin-bottom: 1em;
+}
+
+#registration .checkboxText{
+    display: inline;
+    float: inherit;
+}
+
+#registration input{
+    width: 370px;
+}
+
+#registration input[type="checkbox"] {
+    width: inherit;
+}
+
+#registration select{
+    width:370px;
+}
+
