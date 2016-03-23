@@ -13,8 +13,15 @@ main > aside {
 }
 
 body{
-    margin:0em;
-    font-family: Arial;
+    margin:0;
+    height: 100%;
+    font-family: Arial, serif;
+    background: -webkit-linear-gradient(#ffffff, rgba(79, 79, 140, 0.20));
+    background: -o-linear-gradient(#fff, rgba(79, 79, 140, 0.20));
+    background: -moz-linear-gradient(#fff, rgba(79, 79, 140, 0.20));
+    background: linear-gradient(#ffffff, rgba(79, 79, 140, 0.20));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* Footer */
@@ -28,8 +35,8 @@ footer{
 
 header {
     height: 5em;
-    margin: 0em;
-    padding: 0em;
+    margin: 0;
+    padding: 0;
     background: -webkit-linear-gradient(#F97500, #cc3407);
     background: -o-linear-gradient(#F97500, #cc3407);
     background: -moz-linear-gradient(#F97500, #cc3407);
@@ -40,13 +47,17 @@ header {
     box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
 }
 
-header > img {
+.headerLogo {
     margin: 15px;
+    float: left;
 }
 
-header > div{
-    display: inline;
-   /* TODO: center vertical */
+.headerText{
+    float: left;
+    top: 24px;
+    position: relative;
+    font-size: 20pt;
+    font-weight: 600;
 }
 
 
@@ -139,13 +150,21 @@ aside > div{
     padding-left: 10px;
 }
 
-#registration{
-    background-color: aqua;
-    margin: auto;
-    width: 60%;
-    padding: 10px;
+/*Registration Stuff */
 
+#registration {
+    margin: auto;
+    width: 600px;
+    padding: 10px;
 }
+
+@media all and (max-width: 640px) {
+    #registration {
+        width: 60%;
+        margin: 20px;
+    }
+}
+
 
 #registration label{
     display:block;
@@ -160,7 +179,13 @@ aside > div{
 }
 
 #registration input{
+    /*TODO: input field size muss sich an fenstergröße anpassen */
     width: 370px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 9px;
+    font-size: 90%;
 }
 
 #registration input[type="checkbox"] {
@@ -168,6 +193,52 @@ aside > div{
 }
 
 #registration select{
-    width:370px;
+    /*TODO: change select box form */
+    width:390px;
+
+    cursor: pointer;
+}
+
+#registration h3{
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+#registration p{
+    margin-top: 30px;
+}
+
+#registration label{
+    margin-bottom: 10px;
+}
+
+#button {
+    text-align: center;
+}
+
+#button button{
+    /*TODO: button field size muss sich an fenstergröße anpassen */
+    width: 370px;
+    height: 45px;
+    border: 1px solid gray;
+    border-radius: 6px;
+    background: -webkit-linear-gradient(rgba(176, 175, 166, 0.76), rgba(99, 97, 90, 0.57));
+    background: -o-linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
+    background: -moz-linear-gradient(rgba(176, 166, 176, 0.76), rgba(99, 97, 90, 0.57));
+    background: linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
+    font-size: 90%;
+}
+
+#AGBBox {
+    /*TODO: Text darf nicht einrücken */
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#info {
+    /*TODO: Text darf nicht einrücken */
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
