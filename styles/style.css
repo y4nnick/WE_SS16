@@ -139,8 +139,10 @@ aside > div{
     padding-left: 10px;
 }
 
+
+/* Registration */
+
 #registration{
-    background-color: aqua;
     margin: auto;
     width: 60%;
     padding: 10px;
@@ -160,7 +162,18 @@ aside > div{
 }
 
 #registration input{
-    width: 370px;
+    width: 100%;
+    font-size: 120%;
+    padding: 5px;
+    border: 1px solid #A1A1A1;
+
+    -moz-border-radius:     5px;
+    -webkit-border-radius:  5px;
+    border-radius:          5px;
+
+    -webkit-box-shadow:0px;
+    -moz-box-shadow:0px;
+    box-shadow:0px;
 }
 
 #registration input[type="checkbox"] {
@@ -168,6 +181,35 @@ aside > div{
 }
 
 #registration select{
-    width:370px;
+    width: 100%;
+    font-size: 100%;
+    padding: 10px;
+    height:35px;
+    line-height:35px;
+    background: #ffffff;
 }
 
+#registration button{
+    width: 100%;
+    height:50px;
+    font-size: 110%;
+    margin-top: 20px;
+    border: 1px solid #A1A1A1;
+
+    -moz-border-radius:     5px;
+    -webkit-border-radius:  5px;
+    border-radius:          5px;
+    
+    -webkit-box-shadow:0px;
+    -moz-box-shadow:0px;
+    box-shadow:0px;
+
+    background: -webkit-linear-gradient(    #efefef, #a3a3a3);
+    background: -o-linear-gradient(         #efefef, #a3a3a3);
+    background: -moz-linear-gradient(       #efefef, #a3a3a3);
+    background: linear-gradient(            #efefef, #a3a3a3);
+}
+
+.text-center{
+    text-align: center
+}
