@@ -8,9 +8,9 @@
 
 <body>
 <header>
-    <img src="images/big-logo-small.png">
-
-    <div>BIG Bid</div>
+    <img class="headerLogo" src="images/big-logo-small.png" />
+    <div class="headerText">BIG Bid</div>
+    <div style="clear:both" />
 </header>
 
 <main>
@@ -317,22 +317,21 @@
                 </p>
             </section>
 
-            <section class="text-center">
+            <section id="AGBBox" style="text-align: center">
                 <input type="checkbox" name="AGB" id="AGB" value="AGB"/>
                 <label class="checkboxText" for="AGB">
                     Mit meiner Anmeldung akzeptiere ich die AGB. *
                 </label>
             </section>
 
-            <div id="botton">
+            <div id="button">
                 <button type="button">Registrieren</button>
             </div>
 
-            <section class="text-center">
-                <p>
-                    Mit * gekennzeichnete Felder sind Pflichtfelder
-                </p>
-            </section>
+            <div id="info">
+                Mit * gekennzeichnete Felder sind Pflichfelder.
+            </div>
+
         </form>
     </article>
 </main>
