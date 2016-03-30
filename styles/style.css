@@ -1,16 +1,115 @@
-main { display: flex; }
-main > article { order: 2; min-width: 12em; flex: 1; }
+/*
+    Main
+*/
+
+main {
+    display: flex;
+    background-color: aquamarine;
+}
+
+main > section {
+    order: 2;
+    min-width: 12em;
+    flex: 1;
+}
+
 main > aside {
     order: 3;
     width: 300px;
     border-left: 1px solid #A1A1A1;
 }
-@media all and (max-width: 600px) {
-    main { flex-flow: column; }
-    main > article, main > nav, main > aside {
-        order: 0; width: auto;
+
+
+
+/*
+    Viewport
+*/
+
+
+@media all and (max-width: 479px){
+    main {
+        display:flex;
+        flex-flow: column;
+        background-color: bisque;
+    }
+
+    main > section, main > nav, main > aside {
+        width: auto;
+    }
+
+    main > section{
+        order: 2;
+    }
+
+    main > aside{
+        order: 1;
     }
 }
+
+@media all and (min-width: 480px) {
+    main {
+        flex-flow: column;
+        background-color: indianred;
+    }
+    main > section, main > nav, main > aside {
+        order: 0;
+    }
+
+    main > section{
+        order: 2;
+    }
+
+    main > aside{
+        order: 1;
+    }
+}
+
+@media all and (min-width: 768px) {
+    main {
+        display: flex;
+        flex-flow: row;
+        background-color: violet;
+    }
+
+
+    main > section{
+        min-width: 12em;
+        order: 1;
+        flex:1;
+    }
+
+    main > aside{
+        order: 2;
+        width: 300px;
+        border-left: 1px solid #A1A1A1;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    main {
+        display: flex;
+        flex-flow: row;
+        background-color: violet;
+    }
+
+
+    main > section{
+        min-width: 12em;
+        order: 1;
+        flex:1;
+    }
+
+    main > aside{
+        order: 2;
+        width: 300px;
+        border-left: 1px solid #A1A1A1;
+    }
+}
+
+
+/*
+    Body
+*/
 
 body{
     margin:0;
@@ -24,7 +123,9 @@ body{
     background-attachment: fixed;
 }
 
-/* Footer */
+/*
+    Footer
+*/
 
 footer{
     width: 100%;
@@ -33,7 +134,10 @@ footer{
 }
 
 
-/* Header Stuff */
+
+/*
+    Header
+*/
 
 header {
     height: 5em;
@@ -63,7 +167,10 @@ header {
 }
 
 
-/* Articles Stuff */
+
+/*
+    Section
+*/
 
 section > h1{
     font-weight: bold;
@@ -77,10 +184,18 @@ section > div{
     flex-wrap: wrap;
 }
 
+
+
+/*
+    Articles
+*/
+
 article{
     margin: 1em;
-    width: 250px;
-    height:380px;
+    background-color: white;
+
+    width: 195px;
+
 
     -webkit-box-shadow: 1px 0px 15px 0px rgba(0,0,0,0.6);
     -moz-box-shadow:    1px 0px 15px 0px rgba(0,0,0,0.6);
@@ -118,13 +233,13 @@ article > div{
 }
 
 article > div > div.title{
-    font-size: 150%;
+    font-size: 120%;
     margin-top: 0.5em;
 
  }
 
 article > div > div.price{
-    font-size: 150%;
+    font-size: 120%;
     margin-top: 0.5em;
 }
 
@@ -133,6 +248,7 @@ article > div > div.time{
     float: left;
     margin-left: 10px;
     margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 article > div > div.bidder{
@@ -140,10 +256,14 @@ article > div > div.bidder{
     float: right;
     margin-right: 10px;
     margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 
-/* Aside Stuff */
+
+/*
+    Aside
+*/
 
 aside > div{
     padding-left: 10px;
@@ -170,6 +290,9 @@ aside > div ul > li{
     float: right;
     margin-right: 10px;
 }
+
+
+
 
 /*
     Registration
