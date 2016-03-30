@@ -65,23 +65,19 @@ header {
 
 /* Articles Stuff */
 
-article{
-    margin: 10px;
-}
-
-article > h1{
+section > h1{
     font-weight: bold;
     margin-left: 20px;
     margin-bottom: 10px;
 }
 
-article > div{
+section > div{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-article > div > div{
+article{
     margin: 1em;
     width: 250px;
     height:380px;
@@ -94,18 +90,18 @@ article > div > div{
     border-radius: 5px;
 }
 
-article > div > div:hover{
+article:hover{
     -webkit-box-shadow: 1px 0px 15px 0px rgb(237, 121, 15);
     -moz-box-shadow:    1px 0px 15px 0px rgb(237, 121, 15);
     box-shadow:         1px 0px 15px 0px rgb(237, 121, 15);
     color:rgb(237, 121, 15);
 }
 
-article > div > div.expired{
+article.expired{
     color: #A1A1A1;
 }
 
-article > div > div > img{
+article > img{
     width: 100%;
 
     -webkit-border-radius:  4px 4px 0px 0px;
@@ -114,32 +110,32 @@ article > div > div > img{
 }
 
 /* Text Box */
-article > div > div > div{
+article > div{
     width: 100%;
     height: 100%;
     text-align: center;
     font-weight: 300;
 }
 
-article > div > div > div > div.title{
+article > div > div.title{
     font-size: 150%;
     margin-top: 0.5em;
 
  }
 
-article > div > div > div > div.price{
+article > div > div.price{
     font-size: 150%;
     margin-top: 0.5em;
 }
 
-article > div > div > div > div.time{
+article > div > div.time{
     display: inline;
     float: left;
     margin-left: 10px;
     margin-top: 1em;
 }
 
-article > div > div > div > div.bidder{
+article > div > div.bidder{
     display: inline;
     float: right;
     margin-right: 10px;
@@ -285,8 +281,6 @@ aside > div ul > li{
     background: -moz-linear-gradient(rgba(176, 166, 176, 0.76), rgba(99, 97, 90, 0.57));
     background: linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
     font-size: 90%;
-
-
 }
 
 #AGBBox {
