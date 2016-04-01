@@ -22,7 +22,7 @@ function hasNativeDateInput() {
  */
 function getNormalizedDateString(selector) {
     var dateDelimiters = ['/','\\','-'];
-    value = $(selector).val();
+    var value = $(selector).val();
 
     // normalize delimiter to .
     for(var i = 0; i < dateDelimiters.length; i++)

@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/framework.js"></script>
+    <script src="scripts/validation.js"></script>
     <meta charset="UTF-8">
     <link type="text/css" rel="stylesheet" href="styles/style.css">
     <title>BIG Bid</title>
@@ -32,26 +36,38 @@
                 <p>
                     <label for="fname">Vorname *</label>
                     <input type="text" id="fname" name="firstname">
+                    <span class="error error-mandatory">Vorname ist erforderlich.</span>
                 </p>
 
                 <p>
                     <label for="lname">Nachname *</label>
                     <input type="text" id="lname" name="lastname">
+                    <span class="error error-mandatory">Nachname ist erforderlich.</span>
                 </p>
 
                 <p>
                     <label for="bday">Geburtsdatum *</label>
                     <input type="date" id="bday" name="birthday">
+                    <span class="error error-too-young">Sie müssen mindestens 18 Jahre alt sein.</span>
+                    <span class="error error-invalid-date">Ungültiges Datum.</span>
+                    <span class="error error-mandatory">Geburtsdatum ist erforderlich.</span>
+                    <span class="error error-not-born-yet">Da Zeitreisen noch nicht möglich sind, werden Sie wohl ein falsches
+                    Datum eingegeben haben.</span>
                 </p>
 
                 <p>
                     <label for="email">Email *</label>
                     <input type="email" id="email" name="email">
+                    <span class="error error-invalid">Ungültige E-Mail Adresse.</span>
+                    <span class="error error-mandatory">E-Mail Adresse ist erforderlich.</span>
                 </p>
 
                 <p>
                     <label for="password">Passwort *</label>
                     <input type="password" id="password" name="password">
+                    <span class="error error-too-short">Passwort ist zu kurz.</span>
+                    <span class="error error-too-long">Passwort ist zu lang.</span>
+                    <span class="error error-mandatory">Passwort ist erforderlich.</span>
                 </p>
             </section>
 
@@ -319,13 +335,14 @@
 
             <section id="AGBBox" style="text-align: center">
                 <input type="checkbox" name="AGB" id="AGB" value="AGB"/>
+                <span class="error error-not-checked">Sie müssen den AGB zustimmen.</span>
                 <label class="checkboxText" for="AGB">
                     Mit meiner Anmeldung akzeptiere ich die AGB. *
                 </label>
             </section>
 
             <div id="button">
-                <button type="button">Registrieren</button>
+                <button type="button" id="submitButton">Registrieren</button>
             </div>
 
             <div id="info">

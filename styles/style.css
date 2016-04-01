@@ -364,7 +364,7 @@ aside > div ul > li{
     -moz-border-radius:     5px;
     -webkit-border-radius:  5px;
     border-radius:          5px;
-    
+
     -webkit-box-shadow:0px;
     -moz-box-shadow:0px;
     box-shadow:0px;
@@ -421,4 +421,10 @@ aside > div ul > li{
 
 .text-center{
     text-align: center
+}
+
+.error {
+    display: none;
+    font-size: 80%;
+    color: red;
 }
