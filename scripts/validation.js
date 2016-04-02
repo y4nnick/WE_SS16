@@ -1,22 +1,52 @@
 $(function () {
+
+    hasFormValidation();
+
+    var $fname = $("#fname");
+    var $lname = $("#lname");
+    var $bday = $("#bday");
+    var $password = $("#password");
+    var $email = $("#email");
+    var $AGB = $("#AGB");
+    var fields = [$fname, $lname, $bday, $password, $email];
+
+    var $submitButton = $("#submitButton");
+
+    for (var field in fields) {
+        fields[field].data('valid', false);
+    }
+
+    function checkValidForm() {
+        for (var field in fields) {
+            if (! fields[field].data('valid')) {
+                $submitButton.attr('disabled', true);
+                return;
+            }
+        }
+
+        $submitButton.removeAttr('disabled');
+    }
+
     var validateMandatory = function () {
         var elem = $(this);
         var val = elem.val();
 
         elem.find("~ .error-mandatory").hide();
+        elem.data('valid', true);
 
         if (val == null || val == "") {
             elem.find("~ .error-mandatory").show();
-            return false;
+            elem.data('valid', false);
         }
+
+        checkValidForm();
     };
 
-    $("#fname").on('focus keyup', validateMandatory);
-    $("#lname").on('focus keyup', validateMandatory);
-    $("#bday").on('focus keyup', validateMandatory);
-    $("#password").on('focus keyup', validateMandatory);
-    $("#email").on('focus keyup', validateMandatory);
-
+    $fname.on('focus keyup', validateMandatory);
+    $lname.on('focus keyup', validateMandatory);
+    $bday.on('focus keyup', validateMandatory);
+    $password.on('focus keyup', validateMandatory);
+    $email.on('focus keyup', validateMandatory);
 
     function isMinAge(normalizedBirthday) {
         var minAge = 18;
@@ -29,45 +59,51 @@ $(function () {
     }
 
     var validateBirthday = function () {
-        var normalizedDate = getNormalizedDateString("#bday").split(".");
-        var normalizedBirthday = new Date(normalizedDate[2], normalizedDate[1] - 1, normalizedDate[0]);
-        var elem = $(this);
+        if(!hasNativeDateInput()) {
+            var normalizedDate = getNormalizedDateString("#bday").split(".");
+            var normalizedBirthday = new Date(normalizedDate[2], normalizedDate[1] - 1, normalizedDate[0]);
+            var elem = $(this);
 
-        elem.find("~ .error-invalid-date").hide();
-        elem.find("~ .error-not-born-yet").hide();
-        elem.find("~ .error-too-young").hide();
+            elem.find("~ .error-invalid-date").hide();
+            elem.find("~ .error-not-born-yet").hide();
+            elem.find("~ .error-too-young").hide();
+            elem.data('valid', true);
 
-        if (!isValidDate(normalizedBirthday)) {
-            elem.find("~ .error-invalid-date").show();
-            return false;
-        }
+            if (!isValidDate(normalizedBirthday)) {
+                elem.find("~ .error-invalid-date").show();
+                elem.data('valid', false);
+            } else if (normalizedBirthday > new Date()) {
+                elem.find("~ .error-not-born-yet").show();
+                elem.data('valid', false);
+            } else if (!isMinAge(normalizedBirthday)) {
+                elem.find("~ .error-too-young").show();
+                elem.data('valid', false);
+            }
 
-        if (normalizedBirthday > new Date()) {
-            elem.find("~ .error-not-born-yet").show();
-            return false;
-        }
+            checkValidForm();
+        } else {
 
-        if (!isMinAge(normalizedBirthday)) {
-            elem.find("~ .error-too-young").show();
-            return false;
         }
     };
 
-    $("#bday").on('change', validateBirthday);
+    $bday.on('change', validateBirthday);
 
     var validateEmail = function () {
         var elem = $(this);
         var regex = /^\S+@\S+\.\S+$/;
 
         elem.find("~ .error-invalid").hide();
+        elem.data('valid', true);
 
         if (!regex.test(elem.val())) {
             elem.find("~ .error-invalid").show();
-            return false;
+            elem.data('valid', false);
         }
+
+        checkValidForm();
     };
 
-    $("#email").on('change', validateEmail);
+    $email.on('change', validateEmail);
 
     var validatePassword = function () {
         var elem = $(this);
@@ -75,32 +111,34 @@ $(function () {
 
         elem.find("~ .error-too-short").hide();
         elem.find("~ .error-too-long").hide();
+        elem.data('valid', true);
 
         if (val.length < 4) {
             elem.find("~ .error-too-short").show();
-            return false;
+            elem.data('valid', false);
+        } else if (val.length > 8) {
+            elem.find("~ .error-too-long").show();
+            elem.data('valid', false);
         }
 
-        if (val.length > 8) {
-            elem.find("~ .error-too-long").show();
+        checkValidForm();
+    };
+
+    $password.on('change', validatePassword);
+
+    var validateAGB = function () {
+        var val = $AGB.is(':checked');
+
+        $AGB.find("~.error-not-checked").hide();
+
+        if(val == false){
+            $AGB.find("~.error-not-checked").show();
             return false;
         }
     };
 
-    $('#password').on('change', validatePassword);
-
-    var validateAGBCheckBox = function () {
-        var elem = $(this);
-        var val = elem.val();
-
-        elem.find("~ .error-not-checked").hide();
-
-        if(!val.checked){
-            elem.find("~ .error-not-checked").show();
-            return false;
-        }
-    }
-
-    $('#AGB').on('change', validateAGBCheckBox);
-
+    $submitButton.on('click', function(){
+        validateAGB();
+        alert('Vielen Dank!');
+    })
 });
