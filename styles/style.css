@@ -18,96 +18,8 @@ main > section {
 main > aside {
     order: 3;
     width: 300px;
-    border-left: 1px solid #A1A1A1;
+    border-left: 1px solid #CCCCCC;
 }
-
-
-
-/*
-    Viewport
-*/
-
-
-@media all and (max-width: 479px){
-    main {
-        display:flex;
-        flex-flow: column;
-        /*background-color: bisque;*/
-    }
-
-    main > section, main > nav, main > aside {
-        width: auto;
-    }
-
-    main > section{
-        order: 2;
-    }
-
-    main > aside{
-        order: 1;
-    }
-}
-
-@media all and (min-width: 480px) {
-    main {
-        flex-flow: column;
-        /*background-color: indianred;*/
-    }
-    main > section, main > nav, main > aside {
-        order: 0;
-    }
-
-    main > section{
-        order: 2;
-    }
-
-    main > aside{
-        order: 1;
-    }
-}
-
-@media all and (min-width: 768px) {
-    main {
-        display: flex;
-        flex-flow: row;
-        /*background-color: violet;*/
-    }
-
-
-    main > section{
-        min-width: 12em;
-        order: 1;
-        flex:1;
-    }
-
-    main > aside{
-        order: 2;
-        width: 300px;
-        border-left: 1px solid #A1A1A1;
-    }
-}
-
-@media all and (min-width: 1024px) {
-    main {
-        display: flex;
-        flex-flow: row;
-        /*background-color: violet;*/
-    }
-
-
-    main > section{
-        min-width: 12em;
-        order: 1;
-        flex:1;
-    }
-
-    main > aside{
-        order: 2;
-        width: 300px;
-        border-left: 1px solid #A1A1A1;
-    }
-}
-
 
 
 /*
@@ -198,15 +110,15 @@ section > div{
 */
 
 article{
-    margin: 1em;
+    margin: 0.6em;
     background-color: white;
 
-    width: 195px;
+    width: 206px;
 
 
-    -webkit-box-shadow: 1px 0px 15px 0px rgba(0,0,0,0.6);
-    -moz-box-shadow:    1px 0px 15px 0px rgba(0,0,0,0.6);
-    box-shadow:         1px 0px 15px 0px rgba(0,0,0,0.6);
+    -webkit-box-shadow: 1px 0px 10px 0px rgba(0,0,0,0.6);
+    -moz-box-shadow:    1px 0px 10px 0px rgba(0,0,0,0.6);
+    box-shadow:         1px 0px 10px 0px rgba(0,0,0,0.6);
 
     border: 1px solid #A1A1A1;
     border-radius: 5px;
@@ -273,7 +185,14 @@ article > div > div.bidder{
 */
 
 aside > div{
-    padding-left: 10px;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+aside > div:first-of-type{
+    border-bottom: 1px solid #CCCCCC;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
 }
 
 aside > hr{
@@ -299,6 +218,159 @@ aside > div ul > li{
 }
 
 
+
+
+/*
+    Viewport
+*/
+
+
+@media all and (max-width: 479px){
+    main {
+        display:flex;
+        flex-flow: column;
+        /*background-color: bisque;*/
+    }
+
+    main > section, main > nav, main > aside {
+        width: auto;
+    }
+
+    main > section{
+        order: 2;
+    }
+
+    main > aside{
+        order: 1;
+    }
+
+    main > aside > div:last-of-type{
+        border-bottom: 1px solid #CCCCCC;
+    }
+
+    article{
+        width: 100%;
+    }
+}
+
+@media all and (min-width: 480px) {
+    main {
+        flex-flow: column;
+        /*background-color: indianred;*/
+    }
+    main > section, main > nav, main > aside {
+        order: 0;
+    }
+
+    main > section{
+        order: 2;
+    }
+
+    main > aside{
+        order: 1;
+        display:flex;
+        width: 100%;
+        border-bottom: 1px solid #CCCCCC;
+        border-left: 1em solid transparent;
+        border-right: 1em solid transparent;
+
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    aside > div:first-of-type{
+        border: none;
+        padding-bottom: 0px;
+        border-right: 1px solid #CCCCCC;
+        margin-left: 0px;
+    }
+
+    aside > div > h2,h3{
+        margin-top: 0px;
+    }
+
+    aside > div:last-of-type{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    aside > div:first-of-type > div:last-of-type{
+        margin-bottom: 0.5em;
+    }
+
+    aside > div{
+        width: 50%;
+    }
+}
+
+@media all and (min-width: 768px) {
+    main {
+        display: flex;
+        flex-flow: row;
+        /*background-color: violet;*/
+    }
+
+
+    main > section{
+        min-width: 12em;
+        order: 1;
+        flex:1;
+    }
+
+    main > aside{
+        order: 2;
+        width: 300px;
+        border-left: 1px solid #A1A1A1;
+        border-right: none;
+        border-bottom: none;
+        padding-left: 1em;
+        flex-flow: row;
+        display: block;
+
+        margin-right: 1em;
+    }
+
+    main > aside > div{
+        width: 100%;
+    }
+
+
+    aside > div:first-of-type{
+        border-bottom: 1px solid #CCCCCC;
+        padding-bottom: 1em;
+        margin-bottom: 1em;
+        border-right: none;
+
+    }
+
+    aside > div > div > div.pull-right{
+        margin-right: 0px;
+    }
+
+    aside > div:last-of-type{
+        margin-left: 0px;
+    }
+}
+
+@media all and (min-width: 1024px) {
+    main {
+        display: flex;
+        flex-flow: row;
+        /*background-color: violet;*/
+    }
+
+    main > section {
+        min-width: 12em;
+        order: 1;
+        flex: 1;
+    }
+
+    main > aside {
+        order: 2;
+        width: 300px;
+        border-left: 1px solid #CCCCCC;
+    }
+}
 
 
 /*
