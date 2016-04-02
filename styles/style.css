@@ -151,11 +151,12 @@ article > div{
     font-weight: 300;
 }
 
-article > div > div.title{
-    font-size: 120%;
+article > div > h2{
     margin-top: 0.5em;
-
- }
+    margin-bottom: 0px;
+    font-size: 120%;
+    font-weight: normal;
+}
 
 article > div > div.price{
     font-size: 120%;
