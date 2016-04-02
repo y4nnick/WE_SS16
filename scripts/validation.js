@@ -1,7 +1,7 @@
 
 $(function () {
 
-    if(false) {
+   // if(!hasFormValidation()) {
         var $fname = $("#fname");
         var $lname = $("#lname");
         var $bday = $("#bday");
@@ -142,5 +142,5 @@ $(function () {
             validateAGB();
             alert('Vielen Dank!');
         })
-    }
+   // }
 });
