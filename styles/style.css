@@ -1,10 +1,12 @@
+* {box-sizing: border-box;}  /* --> http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+
 /*
     Main
 */
 
 main {
     display: flex;
-    background-color: aquamarine;
+    /*background-color: aquamarine;*/
 }
 
 main > section {
@@ -30,7 +32,7 @@ main > aside {
     main {
         display:flex;
         flex-flow: column;
-        background-color: bisque;
+        /*background-color: bisque;*/
     }
 
     main > section, main > nav, main > aside {
@@ -49,7 +51,7 @@ main > aside {
 @media all and (min-width: 480px) {
     main {
         flex-flow: column;
-        background-color: indianred;
+        /*background-color: indianred;*/
     }
     main > section, main > nav, main > aside {
         order: 0;
@@ -68,7 +70,7 @@ main > aside {
     main {
         display: flex;
         flex-flow: row;
-        background-color: violet;
+        /*background-color: violet;*/
     }
 
 
@@ -89,7 +91,7 @@ main > aside {
     main {
         display: flex;
         flex-flow: row;
-        background-color: violet;
+        /*background-color: violet;*/
     }
 
 
@@ -107,12 +109,14 @@ main > aside {
 }
 
 
+
 /*
     Body
 */
 
 body{
     margin:0;
+    min-width: 260px;
     height: 100%;
     font-family: Arial, serif;
     background: -webkit-linear-gradient(#ffffff, rgba(79, 79, 140, 0.20));
@@ -123,6 +127,8 @@ body{
     background-attachment: fixed;
 }
 
+
+
 /*
     Footer
 */
@@ -131,6 +137,7 @@ footer{
     width: 100%;
     text-align: center;
     color: darkgray;
+    margin-bottom: 1em;
 }
 
 
@@ -298,38 +305,29 @@ aside > div ul > li{
     Registration
 */
 
+#registrationMain{
+    flex-flow: row;
+}
+
 #registration {
+    width: 768px;
     margin: auto;
-    width: 600px;
-    padding: 10px;
-}
 
-@media all and (max-width: 640px) {
-    #registration {
-        width: 60%;
-        margin: 20px;
-    }
-}
+    padding-left: 20px;
+    padding-right: 20px;
 
+}
 
 #registration label{
-    display:block;
-    float:left;
-    width:200px;
-    margin-bottom: 1em;
+    width:50%;
 }
 
-#registration .checkboxText{
-    display: inline;
-    float: inherit;
-}
 
 #registration input{
-    width: 100%;
+    width: 50%;
     font-size: 120%;
     padding: 5px;
     border: 1px solid lightgray;
-    cursor: pointer;
 
     -moz-border-radius:     6px;
     -webkit-border-radius:  6px;
@@ -340,70 +338,118 @@ aside > div ul > li{
     box-shadow:0px;
 }
 
-#registration input[type="checkbox"] {
-    width: inherit;
-}
 
 #registration select{
-    width: 100%;
+    width: 50%;
     font-size: 100%;
-    padding: 10px;
     height:35px;
     line-height:35px;
     background: #ffffff;
-    cursor: pointer;
 }
 
-#registration button{
-    width: 100%;
-    height:50px;
-    font-size: 110%;
-    margin-top: 20px;
-    border: 1px solid #A1A1A1;
+#registration div{
+    margin-top: 30px;
+}
 
-    -moz-border-radius:     5px;
-    -webkit-border-radius:  5px;
-    border-radius:          5px;
+
+#registration button{
+    width: 50%;
+    height:45px;
+
+    border: 1px solid gray;
+    font-size: 90%;
+
+    margin: 0 auto;
+
+    -moz-border-radius:     6px;
+    -webkit-border-radius:  6px;
+    border-radius:          6px;
 
     -webkit-box-shadow:0px;
     -moz-box-shadow:0px;
     box-shadow:0px;
 
-    background: -webkit-linear-gradient(    #efefef, #a3a3a3);
-    background: -o-linear-gradient(         #efefef, #a3a3a3);
-    background: -moz-linear-gradient(       #efefef, #a3a3a3);
-    background: linear-gradient(            #efefef, #a3a3a3);
+    background: -webkit-linear-gradient(rgba(176, 175, 166, 0.76), rgba(99, 97, 90, 0.57));
+    background: -o-linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
+    background: -moz-linear-gradient(rgba(176, 166, 176, 0.76), rgba(99, 97, 90, 0.57));
+    background: linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
 
 }
+
+#buttonDiv{
+    text-align: center;
+}
+
+
+
+@media all and (max-width: 399px) {
+    #registration {
+        width: 100%;
+        /*background-color: chartreuse;*/
+    }
+
+    #registration div{
+        margin-top: 1em;
+    }
+
+    #registration label{
+        width: 100%;
+        margin-bottom: 0.5em;
+    }
+
+    #registration input{
+        width: 100%;
+    }
+
+    #registration select{
+        width: 100%;
+    }
+
+    #registration button{
+        width: 100%;
+    }
+}
+
+@media all and (min-width: 400px) {
+    #registration {
+        width: 100%;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 0px;
+    }
+}
+
+
+@media all and (min-width: 768px) {
+    #registration {
+        width: 768px;
+        margin: auto;
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+
+#registration .checkboxText{
+    display: inline;
+    float: inherit;
+}
+
+
+#registration input[type="checkbox"] {
+    width: inherit;
+}
+
 
 #registration h3{
     margin-bottom: 40px;
     margin-top: 40px;
 }
 
-#registration p{
-    margin-top: 30px;
-}
 
 #registration label{
-    margin-bottom: 10px;
-}
-
-#button {
-    text-align: center;
-}
-
-#button button{
-    /*TODO: button field size muss sich an fenstergröße anpassen */
-    width: 100%;
-    height: 45px;
-    border: 1px solid gray;
-    border-radius: 6px;
-    background: -webkit-linear-gradient(rgba(176, 175, 166, 0.76), rgba(99, 97, 90, 0.57));
-    background: -o-linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
-    background: -moz-linear-gradient(rgba(176, 166, 176, 0.76), rgba(99, 97, 90, 0.57));
-    background: linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
-    font-size: 90%;
+    margin-top: 10px;
 }
 
 #AGBBox {

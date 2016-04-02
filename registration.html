@@ -17,34 +17,34 @@
     <div style="clear:both" />
 </header>
 
-<main>
+<main id="registrationMain">
     <form id="registration">
         <h1> Registrieren </h1>
 
         <section>
             <h3> Persönliche Daten </h3>
 
-            <p>
+            <div>
                 <label for="title">Anrede *</label>
                 <select id="title" name="title">
                     <option value="frau">Frau</option>
                     <option value="herr">Herr</option>
                 </select>
-            </p>
+            </div>
 
-            <p>
+            <div>
                 <label for="fname">Vorname *</label>
                 <input type="text" id="fname" name="firstname">
-                <span class="error error-mandatory">Vorname ist erforderlich.</span>
-            </p>
+             <!--   <span class="error error-mandatory">Vorname ist erforderlich.</span>-->
+            </div>
 
-            <p>
+            <div>
                 <label for="lname">Nachname *</label>
                 <input type="text" id="lname" name="lastname">
                 <span class="error error-mandatory">Nachname ist erforderlich.</span>
-            </p>
+            </div>
 
-            <p>
+            <div>
                 <label for="bday">Geburtsdatum *</label>
                 <input type="date" id="bday" name="birthday">
                 <span class="error error-too-young">Sie müssen mindestens 18 Jahre alt sein.</span>
@@ -52,38 +52,38 @@
                 <span class="error error-mandatory">Geburtsdatum ist erforderlich.</span>
                     <span class="error error-not-born-yet">Da Zeitreisen noch nicht möglich sind, werden Sie wohl ein falsches
                     Datum eingegeben haben.</span>
-            </p>
+            </div>
 
-            <p>
+            <div>
                 <label for="email">Email *</label>
                 <input type="email" id="email" name="email">
                 <span class="error error-invalid">Ungültige E-Mail Adresse.</span>
                 <span class="error error-mandatory">E-Mail Adresse ist erforderlich.</span>
-            </p>
+            </div>
 
-            <p>
+            <div>
                 <label for="password">Passwort *</label>
                 <input type="password" id="password" name="password">
                 <span class="error error-too-short">Passwort ist zu kurz.</span>
                 <span class="error error-too-long">Passwort ist zu lang.</span>
                 <span class="error error-mandatory">Passwort ist erforderlich.</span>
-            </p>
+            </div>
         </section>
 
         <section>
             <h3> Versandadresse </h3>
 
-            <p>
+            <div>
                 <label for="street">Straße/Hausnummer</label>
                 <input type="text" id="street" name="street">
-            </p>
+            </div>
 
-            <p>
+            <div>
                 <label for="location">PLZ/Ort</label>
                 <input type="text" id="location" name="location">
-            </p>
+            </div>
 
-            <p>
+            <div>
                 <label for="country">Land</label>
                 <select id="country" name="country">
                     <option value="AF">Afghanistan</option>
@@ -329,7 +329,7 @@
                     <option value="CF">Zentralafrikanische Republik</option>
                     <option value="CY">Zypern</option>
                 </select>
-            </p>
+            </div>
         </section>
 
         <section id="AGBBox" style="text-align: center">
@@ -340,8 +340,8 @@
             </label>
         </section>
 
-        <div id="button">
-            <button type="button" id="submitButton" disabled="disabled">Registrieren</button>
+        <div id="buttonDiv">
+            <button type="submit" id="submitButton" disabled="disabled">Registrieren</button>
 
         </div>
 
