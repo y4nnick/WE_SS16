@@ -406,9 +406,9 @@ aside > div ul > li{
     -webkit-border-radius:  6px;
     border-radius:          6px;
 
-    -webkit-box-shadow:0px;
-    -moz-box-shadow:0px;
-    box-shadow:0px;
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow:none;
 }
 
 
@@ -439,9 +439,9 @@ aside > div ul > li{
     -webkit-border-radius:  6px;
     border-radius:          6px;
 
-    -webkit-box-shadow:0px;
-    -moz-box-shadow:0px;
-    box-shadow:0px;
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow:none;
 
     background: -webkit-linear-gradient(rgba(176, 175, 166, 0.76), rgba(99, 97, 90, 0.57));
     background: -o-linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
