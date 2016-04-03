@@ -62,9 +62,7 @@ header {
     height: 5em;
     margin: 0;
     padding: 0;
-    background: -webkit-linear-gradient(#F97500, #cc3407);
-    background: -o-linear-gradient(#F97500, #cc3407);
-    background: -moz-linear-gradient(#F97500, #cc3407);
+
     background: linear-gradient(#F97500, #cc3407);
 
     -webkit-box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
@@ -85,6 +83,21 @@ header {
     font-weight: 600;
 }
 
+.headerButton{
+    height: 50px;
+    width: 100px;
+    top:12px;
+    position: relative;
+    font-size: 80%;
+    font-weight: 300;
+
+    border-radius: 6px;
+    border: 1px solid #003B7C;
+    box-shadow:none;
+    color: white;
+    background: linear-gradient( #006AAB, #003D7E);
+
+}
 
 
 /*
@@ -439,13 +452,7 @@ aside > div ul > li{
     -webkit-border-radius:  6px;
     border-radius:          6px;
 
-    -webkit-box-shadow:none;
-    -moz-box-shadow:none;
     box-shadow:none;
-
-    background: -webkit-linear-gradient(rgba(176, 175, 166, 0.76), rgba(99, 97, 90, 0.57));
-    background: -o-linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
-    background: -moz-linear-gradient(rgba(176, 166, 176, 0.76), rgba(99, 97, 90, 0.57));
     background: linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
 
 }
