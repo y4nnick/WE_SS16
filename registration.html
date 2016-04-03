@@ -45,7 +45,7 @@
 
             <div>
                 <label for="bday">Geburtsdatum *</label>
-                <input type="date" id="bday" name="birthday" required="required">
+                <input type="date" id="bday" name="birthday" required="required" max="1998-04-01" title="Sie müssen mindestens 18 Jahre alt sein.">
                 <span class="error error-too-young">Sie müssen mindestens 18 Jahre alt sein.</span>
                 <span class="error error-invalid-date">Ungültiges Datum.</span>
                 <span class="error error-mandatory">Geburtsdatum ist erforderlich.</span>
@@ -55,14 +55,14 @@
 
             <div>
                 <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required="required" pattern="^\S+@\S+\.\S+$">
+                <input type="email" id="email" name="email" required="required" pattern="^\S+@\S+\.\S+$" title="Form: abc@def.com">
                 <span class="error error-invalid">Ungültige E-Mail Adresse.</span>
                 <span class="error error-mandatory">E-Mail Adresse ist erforderlich.</span>
             </div>
 
             <div>
                 <label for="password">Passwort *</label>
-                <input type="password" id="password" name="password" required="required" pattern="^.{4,8}$">
+                <input type="password" id="password" name="password" required="required" pattern="^.{4,8}$" title="Mindestens 4 und höchstens 8 Ziechen.">
                 <span class="error error-too-short">Passwort ist zu kurz.</span>
                 <span class="error error-too-long">Passwort ist zu lang.</span>
                 <span class="error error-mandatory">Passwort ist erforderlich.</span>
@@ -100,7 +100,7 @@
         </div>
 
         <div id="button">
-            <button type="submit" id="submitButton" disabled="disabled">Registrieren</button>
+            <button type="submit" id="submitButton">Registrieren</button>
         </div>
 
         <div id="info">
