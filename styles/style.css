@@ -31,9 +31,6 @@ body{
     min-width: 260px;
     height: 100%;
     font-family: Arial, serif;
-    background: -webkit-linear-gradient(#ffffff, rgba(79, 79, 140, 0.20));
-    background: -o-linear-gradient(#fff, rgba(79, 79, 140, 0.20));
-    background: -moz-linear-gradient(#fff, rgba(79, 79, 140, 0.20));
     background: linear-gradient(#ffffff, rgba(79, 79, 140, 0.20));
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -65,8 +62,6 @@ header {
 
     background: linear-gradient(#F97500, #cc3407);
 
-    -webkit-box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
-    -moz-box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
     box-shadow: 1px 0px 30px 0px rgba(0,0,0,0.6);
 }
 
@@ -97,7 +92,15 @@ header {
     color: white;
     background: linear-gradient( #006AAB, #003D7E);
 
+    cursor: pointer;
 }
+
+
+
+/*
+    Nav
+*/
+
 
 
 /*
@@ -125,21 +128,13 @@ section > div{
 article{
     margin: 0.6em;
     background-color: white;
-
     width: 206px;
-
-
-    -webkit-box-shadow: 1px 0px 10px 0px rgba(0,0,0,0.6);
-    -moz-box-shadow:    1px 0px 10px 0px rgba(0,0,0,0.6);
     box-shadow:         1px 0px 10px 0px rgba(0,0,0,0.6);
-
     border: 1px solid #A1A1A1;
     border-radius: 5px;
 }
 
 article:hover{
-    -webkit-box-shadow: 1px 0px 15px 0px rgb(237, 121, 15);
-    -moz-box-shadow:    1px 0px 15px 0px rgb(237, 121, 15);
     box-shadow:         1px 0px 15px 0px rgb(237, 121, 15);
     color:rgb(237, 121, 15);
 }
@@ -150,9 +145,6 @@ article.expired{
 
 article > img{
     width: 100%;
-
-    -webkit-border-radius:  4px 4px 0px 0px;
-    -moz-border-radius:     4px 4px 0px 0px;
     border-radius:          4px 4px 0px 0px;
 }
 
@@ -243,7 +235,6 @@ aside > div ul > li{
     main {
         display:flex;
         flex-flow: column;
-        /*background-color: bisque;*/
     }
 
     main > section, main > nav, main > aside {
@@ -270,7 +261,6 @@ aside > div ul > li{
 @media all and (min-width: 480px) {
     main {
         flex-flow: column;
-        /*background-color: indianred;*/
     }
     main > section, main > nav, main > aside {
         order: 0;
@@ -321,9 +311,7 @@ aside > div ul > li{
     main {
         display: flex;
         flex-flow: row;
-        /*background-color: violet;*/
     }
-
 
     main > section{
         min-width: 12em;
@@ -348,13 +336,11 @@ aside > div ul > li{
         width: 100%;
     }
 
-
     aside > div:first-of-type{
         border-bottom: 1px solid #CCCCCC;
         padding-bottom: 1em;
         margin-bottom: 1em;
         border-right: none;
-
     }
 
     aside > div > div > div.pull-right{
@@ -370,7 +356,6 @@ aside > div ul > li{
     main {
         display: flex;
         flex-flow: row;
-        /*background-color: violet;*/
     }
 
     main > section {
@@ -398,32 +383,22 @@ aside > div ul > li{
 #registration {
     width: 768px;
     margin: auto;
-
     padding-left: 20px;
     padding-right: 20px;
-
 }
 
 #registration label{
     width:50%;
 }
 
-
 #registration input{
     width: 50%;
     font-size: 120%;
     padding: 5px;
     border: 1px solid lightgray;
-
-    -moz-border-radius:     6px;
-    -webkit-border-radius:  6px;
     border-radius:          6px;
-
-    -webkit-box-shadow:none;
-    -moz-box-shadow:none;
     box-shadow:none;
 }
-
 
 #registration select{
     width: 50%;
@@ -441,17 +416,11 @@ aside > div ul > li{
 #registration button{
     width: 50%;
     height:45px;
-
     border: 1px solid gray;
     font-size: 90%;
-
     display: table;
     margin: 0 auto;
-
-    -moz-border-radius:     6px;
-    -webkit-border-radius:  6px;
     border-radius:          6px;
-
     box-shadow:none;
     background: linear-gradient(rgba(176, 176, 166, 0.76), rgba(99, 97, 90, 0.57));
 
@@ -466,7 +435,6 @@ aside > div ul > li{
 @media all and (max-width: 399px) {
     #registration {
         width: 100%;
-        /*background-color: chartreuse;*/
     }
 
     #registration div{
@@ -500,36 +468,28 @@ aside > div ul > li{
     }
 }
 
-
 @media all and (min-width: 768px) {
     #registration {
         width: 768px;
         margin: auto;
-
         padding-left: 20px;
         padding-right: 20px;
     }
 }
-
 
 #registration .checkboxText{
     display: inline;
     float: inherit;
 }
 
-
 #registration input[type="checkbox"] {
     width: inherit;
 }
-
 
 #registration h2{
     margin-bottom: 40px;
     margin-top: 40px;
 }
-
-
-
 
 #registration label{
     margin-top: 10px;
