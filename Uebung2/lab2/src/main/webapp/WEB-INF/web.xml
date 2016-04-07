@@ -4,4 +4,17 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
     <!-- Add your deployment description here -->
+
+    <description>This servlet greets its users</description>
+    ￼￼<display-name>Greeting</display-name>
+    <servlet>
+        <servlet-name>Greeting</servlet-name>
+        <servlet-class>at.ac.tuwien.big.we16.ue2.service.GreetingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Greeting</servlet-name>
+        <url-pattern>/GreetingServlet</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
