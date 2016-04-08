@@ -1,0 +1,27 @@
+@startuml
+left to right direction
+
+actor User
+actor Bot
+actor Websocket
+
+rectangle Client {
+	Websocket -> (Nachricht an Client senden)
+	Websocket -> (Auktion abgelaufen)
+	Websocket -> (Neues Gebot abgegeben)
+	Websocket -> (User wurde überboten)
+	(Auktion abgelaufen) .> (Nachricht an Client senden) :extends
+	(Neues Gebot abgegeben) .> (Nachricht an Client senden) :extends
+	(User wurde überboten) .> (Nachricht an Client senden) :extends
+}
+
+rectangle Anwendung {
+	User -> (Produktübersicht anzeigen)
+	(Produktübersicht anzeigen) .> (Anmelden) :include
+	User -> (Detailseite anzeigen)
+	User -> (Gebot abgeben)
+	Bot -> (Gebot abgeben)
+	(Gebot abgeben) .> (Detailseite anzeigen) :extends
+}
+
+@enduml
