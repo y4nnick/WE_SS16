@@ -17,21 +17,7 @@
 
 <a href="#productsheadline" class="accessibility">Zum Inhalt springen</a>
 
-<header aria-labelledby="bannerheadline">
-    <img class="title-image" src="../images/big-logo-small.png" alt="BIG Bid logo">
-
-    <h1 class="header-title" id="bannerheadline">
-        BIG Bid
-    </h1>
-    <nav aria-labelledby="navigationheadline">
-        <h2 class="accessibility" id="navigationheadline">Navigation</h2>
-        <ul class="navigation-list">
-            <li>
-                <a href="" class="button" accesskey="l">Abmelden</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<jsp:include page="header.jsp" flush="true"/>
 <div class="main-container">
     <aside class="sidebar" aria-labelledby="userinfoheadline">
         <div class="user-info-container">
@@ -243,10 +229,6 @@
         </div>
     </main>
 </div>
-<footer>
-    © 2016 BIG Bid
-</footer>
-<script src="/scripts/jquery.js"></script>
-<script src="/scripts/framework.js"></script>
+<jsp:include page="footer.jsp" flush="true"/>
 </body>
 </html>
