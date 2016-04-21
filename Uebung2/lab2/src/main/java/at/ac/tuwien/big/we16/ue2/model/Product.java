@@ -6,14 +6,14 @@ import java.util.Stack;
  * Created by mstrasser on 4/12/16.
  */
 public class Product {
-    private String id;
+    private Integer id;
     private String name;
     private String img;
     private int year;
     private Bid highestBid = null;
     private Stack<Bid> bids = new Stack<Bid>();
 
-    public Product(String ID, String name, String img, int year) {
+    public Product(Integer ID, String name, String img, int year) {
         this.id = ID;
         this.name = name;
         this.img = img;
@@ -48,5 +48,5 @@ public class Product {
     public void setImg() { this.img = img; }
 
     public String getName() { return this.name; }
-    public String getID() { return this.id; }
+    public Integer getID() { return this.id; }
 }

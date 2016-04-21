@@ -6,7 +6,7 @@ package at.ac.tuwien.big.we16.ue2.model;
 public class Book extends Product {
     private String author;
 
-    public Book(String ID, String title, String author, String img, int year) {
+    public Book(Integer ID, String title, String author, String img, int year) {
         super(ID, title, img, year);
         this.author = author;
     }

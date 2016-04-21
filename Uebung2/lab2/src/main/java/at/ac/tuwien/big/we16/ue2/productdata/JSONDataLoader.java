@@ -1,73 +1,101 @@
 package at.ac.tuwien.big.we16.ue2.productdata;
 
+import at.ac.tuwien.big.we16.ue2.model.Book;
+import at.ac.tuwien.big.we16.ue2.model.Movie;
+import at.ac.tuwien.big.we16.ue2.model.Music;
+import at.ac.tuwien.big.we16.ue2.model.Product;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.HashMap;
 
 public class JSONDataLoader {
 
-    private static Product products;
+    private static HashMap<Integer, Product> productHashMap = new HashMap<>();
 
-    public static Music[] getMusic() {
-        if (products == null)
-            loadProducts();
-        return products.getMusic();
+    private static Product_Loader products;
+
+    public static HashMap<Integer,Product> getProducts(){
+        if (products == null)loadProducts();
+        return productHashMap;
     }
 
-    public static Movie[] getFilms() {
-        if (products == null)
-            loadProducts();
-        return products.getMovies();
-    }
-
-    public static Book[] getBooks() {
-        if (products == null)
-            loadProducts();
-        return products.getBooks();
+    public static Product getById(Integer id){
+        if (products == null)loadProducts();
+        return productHashMap.get(id);
     }
 
     private static void loadProducts() {
         InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("products.json");
         Reader reader = new InputStreamReader(is);
         Gson gson = new GsonBuilder().create();
-        products = gson.fromJson(reader, Product.class);
+        products = gson.fromJson(reader, Product_Loader.class);
+
+        int id = 1;
+        for(JSONDataLoader.Music_Loader m: JSONDataLoader.getMusic()) {
+            productHashMap.put(id,new Music(id,m.getAlbum_name(),m.getArtist(),m.getImg(),Integer.valueOf(m.getYear())));
+            id++;
+        }
+
+        for(JSONDataLoader.Book_Loader m: JSONDataLoader.getBooks()) {
+            productHashMap.put(id,new Book(id, m.getTitle(),m.getAuthor(), m.getImg(), Integer.valueOf(m.getYear())));
+            id++;
+        }
+
+        for(JSONDataLoader.Movie_Loader m: JSONDataLoader.getFilms()) {
+            productHashMap.put(id,new Movie(id, m.getTitle(),m.getDirector(), m.getImg(), Integer.valueOf(m.getYear())));
+            id++;
+        }
     }
 
-    public class Product {
-        private Music[] music;
-        private Book[] books;
-        private Movie[] movies;
+    private static Music_Loader[] getMusic() {
+        return products.getMusic();
+    }
 
-        public Music[] getMusic() {
+    private static Movie_Loader[] getFilms() {
+        return products.getMovies();
+    }
+
+    private static Book_Loader[] getBooks() {
+        return products.getBooks();
+    }
+
+    public class Product_Loader {
+        private Music_Loader[] music;
+        private Book_Loader[] books;
+        private Movie_Loader[] movies;
+
+        public Music_Loader[] getMusic() {
             return music;
         }
 
-        public void setMusic(Music[] music) {
+        public void setMusic(Music_Loader[] music) {
             this.music = music;
         }
 
-        public Book[] getBooks() {
+        public Book_Loader[] getBooks() {
             return books;
         }
 
-        public void setBooks(Book[] books) {
+        public void setBooks(Book_Loader[] books) {
             this.books = books;
         }
 
-        public Movie[] getMovies() {
+        public Movie_Loader[] getMovies() {
             return movies;
         }
 
-        public void setMovies(Movie[] movies) {
+        public void setMovies(Movie_Loader[] movies) {
             this.movies = movies;
         }
     }
 
-    public class Music {
+    public class Music_Loader {
 
+        private int id;
         private String album_name;
         private String artist;
         private String year;
@@ -104,10 +132,19 @@ public class JSONDataLoader {
         public void setImg(String img) {
             this.img = img;
         }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
     }
 
-    public class Book {
+    public class Book_Loader {
 
+        public int id;
         private String title;
         private String author;
         private String year;
@@ -144,10 +181,19 @@ public class JSONDataLoader {
         public void setImg(String img) {
             this.img = img;
         }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
     }
 
-    public class Movie {
+    public class Movie_Loader {
 
+        public int id;
         private String title;
         private String director;
         private String year;
@@ -183,6 +229,14 @@ public class JSONDataLoader {
 
         public void setImg(String img) {
             this.img = img;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
         }
     }
 

@@ -8,7 +8,6 @@
   Time: 12:05 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:useBean id="user" scope="session" class="at.ac.tuwien.big.we16.ue2.model.User"/>
 <!doctype html>
 <html lang="de">
 <head>
@@ -23,45 +22,13 @@
 
 <jsp:include page="header.jsp" flush="true"/>
 <div class="main-container">
-    <aside class="sidebar" aria-labelledby="userinfoheadline">
-        <div class="user-info-container">
-            <h2 class="accessibility" id="userinfoheadline">Benutzerdaten</h2>
-            <dl class="user-data properties">
-                <dt class="accessibility">Name:</dt>
-                <dd class="user-name">John Doe</dd>
-                <dt>Kontostand:</dt>
-                <dd>
-                    <span class="balance"><%= user.getBalance() %></span>
-                </dd>
-                <dt>Laufend:</dt>
-                <dd>
-                    <span class="running-auctions-count">0</span>
-                    <span class="auction-label" data-plural="Auktionen" data-singular="Auktion">Auktionen</span>
-                </dd>
-                <dt>Gewonnen:</dt>
-                <dd>
-                    <span class="won-auctions-count"><%= user.getWonAuctions() %></span>
-                    <span class="auction-label" data-plural="Auktionen" data-singular="Auktion">Auktionen</span>
-                </dd>
-                <dt>Verloren:</dt>
-                <dd>
-                    <span class="lost-auctions-count"><%= user.getLostAuctions() %></span>
-                    <span class="auction-label" data-plural="Auktionen" data-singular="Auktion">Auktionen</span>
-                </dd>
-            </dl>
-        </div>
-        <div class="recently-viewed-container">
-            <h3 class="recently-viewed-headline">Zuletzt angesehen</h3>
-            <ul class="recently-viewed-list"></ul>
-        </div>
-    </aside>
+    <jsp:include page="sidebar.jsp" flush="true"/>
     <main aria-labelledby="productsheadline">
         <h2 class="main-headline" id="productsheadline">Produkte</h2>
         <div class="products">
             <c:forEach items="${products}" var="product">
                 <div class="product-outer" data-product-id="${product.getID()}">
-                    <a href="" class="product expired "
-                       title="Mehr Informationen zu ${product.getName()}">
+                    <a href="details?id=${product.getID()}" class="product expired " title="Mehr Informationen zu ${product.getName()}">
                         <img class="product-image" src="images/${product.getImg()}" alt="">
                         <dl class="product-properties properties">
                             <dt>Bezeichnung</dt>

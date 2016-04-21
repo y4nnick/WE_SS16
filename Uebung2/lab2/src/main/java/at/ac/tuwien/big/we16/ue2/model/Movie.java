@@ -6,7 +6,7 @@ package at.ac.tuwien.big.we16.ue2.model;
 public class Movie extends Product {
     private String director;
 
-    public Movie(String ID, String title, String director, String img, int year) {
+    public Movie(Integer ID, String title, String director, String img, int year) {
         super(ID, title, img, year);
         this.director = director;
     }

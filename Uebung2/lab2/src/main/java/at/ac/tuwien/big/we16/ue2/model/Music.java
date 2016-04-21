@@ -6,8 +6,8 @@ package at.ac.tuwien.big.we16.ue2.model;
 public class Music extends Product {
     private String artist;
 
-    public Music(String ID, String title, String artist, String img, int year) {
-        super(ID, title, img, year);
+    public Music(Integer id, String title, String artist, String img, int year) {
+        super(id,title, img, year);
         this.artist = artist;
     }
 
