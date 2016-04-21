@@ -9,9 +9,18 @@ public class Bid {
         this.price = price;
     }
 
+    private Product product;
     private User user;
     private float price;
 
     public User getUser() { return this.user; }
     public float getPrice() { return this.price; }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }

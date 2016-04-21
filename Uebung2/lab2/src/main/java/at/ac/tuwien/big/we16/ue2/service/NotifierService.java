@@ -11,6 +11,10 @@ public class NotifierService {
     private static Map<Session, HttpSession> clients = new ConcurrentHashMap<>();
     private final ScheduledExecutorService executor;
 
+    /**
+     * TODO: HttpSession direkt zum User speichern
+     */
+
     public NotifierService() {
         // Use the scheduled executor to regularly check for recently expired auctions
         // and send a notification to all relevant users.

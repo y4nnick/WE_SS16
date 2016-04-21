@@ -1,5 +1,6 @@
 package at.ac.tuwien.big.we16.ue2.model;
 
+import java.util.Date;
 import java.util.Stack;
 
 /**
@@ -12,6 +13,8 @@ public class Product {
     private int year;
     private Bid highestBid = null;
     private Stack<Bid> bids = new Stack<Bid>();
+
+    private Date auctionEnd;
 
     public Product(Integer ID, String name, String img, int year) {
         this.id = ID;
@@ -49,4 +52,12 @@ public class Product {
 
     public String getName() { return this.name; }
     public Integer getID() { return this.id; }
+
+    public Date getAuctionEnd() {
+        return auctionEnd;
+    }
+
+    public void setAuctionEnd(Date auctionEnd) {
+        this.auctionEnd = auctionEnd;
+    }
 }
