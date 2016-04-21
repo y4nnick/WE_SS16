@@ -1,9 +1,6 @@
 package at.ac.tuwien.big.we16.ue2.productdata;
 
-import at.ac.tuwien.big.we16.ue2.model.Book;
-import at.ac.tuwien.big.we16.ue2.model.Movie;
-import at.ac.tuwien.big.we16.ue2.model.Music;
-import at.ac.tuwien.big.we16.ue2.model.Product;
+import at.ac.tuwien.big.we16.ue2.model.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
