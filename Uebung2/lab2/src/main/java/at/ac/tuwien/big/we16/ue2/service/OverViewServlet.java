@@ -27,9 +27,17 @@ public class OverViewServlet extends HttpServlet {
             products.add(new Product(String.valueOf(m.hashCode()), m.getAlbum_name(), m.getImg(), Integer.valueOf(m.getYear())));
         }
 
+        for(JSONDataLoader.Book m: JSONDataLoader.getBooks()) {
+            products.add(new Product(String.valueOf(m.hashCode()), m.getTitle(), m.getImg(), Integer.valueOf(m.getYear())));
+        }
+
+        for(JSONDataLoader.Movie m: JSONDataLoader.getFilms()) {
+            products.add(new Product(String.valueOf(m.hashCode()), m.getTitle(), m.getImg(), Integer.valueOf(m.getYear())));
+        }
+
         request.setAttribute("products", products);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/Overview.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/overview.jsp");
         dispatcher.forward(request, response);
     }
 }
