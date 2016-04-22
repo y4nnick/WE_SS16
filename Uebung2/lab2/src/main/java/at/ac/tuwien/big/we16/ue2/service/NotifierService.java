@@ -1,11 +1,14 @@
 package at.ac.tuwien.big.we16.ue2.service;
 
+import at.ac.tuwien.big.we16.ue2.model.BidBot;
+
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class NotifierService {
     private static Map<Session, HttpSession> clients = new ConcurrentHashMap<>();
@@ -19,6 +22,11 @@ public class NotifierService {
         // Use the scheduled executor to regularly check for recently expired auctions
         // and send a notification to all relevant users.
         this.executor = Executors.newSingleThreadScheduledExecutor();
+
+        // Start BidBot every 10 seconds
+        // @TODO: Should this be here, or should it have a seperate service?
+        // @TODO: Add products and user to BidBot.
+        this.executor.scheduleAtFixedRate(new BidBot(null, null), 10, 10, TimeUnit.SECONDS);
     }
 
     /**
