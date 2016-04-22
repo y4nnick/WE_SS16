@@ -8,14 +8,15 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class JSONDataLoader {
 
-    private static HashMap<Integer, Product> productHashMap = new HashMap<>();
+    private static ConcurrentHashMap<Integer, Product> productHashMap = new ConcurrentHashMap<>();
 
     private static Product_Loader products;
 
-    public static HashMap<Integer,Product> getProducts(){
+    public static ConcurrentHashMap<Integer, Product> getProducts(){
         if (products == null)loadProducts();
         return productHashMap;
     }

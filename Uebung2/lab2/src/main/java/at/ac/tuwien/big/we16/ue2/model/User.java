@@ -13,6 +13,11 @@ public class User {
     private List<Bid> bids_won = new LinkedList<Bid>();
     private List<Bid> bids_lost = new LinkedList<Bid>();
 
+    public User(String name, int balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+
     public String getName() {
         return this.name;
     }

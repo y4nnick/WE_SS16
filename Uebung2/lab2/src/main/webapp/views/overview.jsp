@@ -26,7 +26,7 @@
     <main aria-labelledby="productsheadline">
         <h2 class="main-headline" id="productsheadline">Produkte</h2>
         <div class="products">
-            <c:forEach items="${products}" var="product">
+            <c:forEach items="${products.values()}" var="product">
                 <div class="product-outer" data-product-id="${product.getID()}">
                     <a href="details?id=${product.getID()}" class="product expired " title="Mehr Informationen zu ${product.getName()}">
                         <img class="product-image" src="images/${product.getImg()}" alt="">

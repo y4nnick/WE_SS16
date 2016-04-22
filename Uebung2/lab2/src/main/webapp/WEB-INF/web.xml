@@ -18,5 +18,8 @@
     <welcome-file-list>
         <welcome-file>overview</welcome-file>
     </welcome-file-list>
+    <listener>
+        <listener-class>at.ac.tuwien.big.we16.ue2.service.InitListener</listener-class>
+    </listener>
 
 </web-app>

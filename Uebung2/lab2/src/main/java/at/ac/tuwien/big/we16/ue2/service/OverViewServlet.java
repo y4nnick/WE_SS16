@@ -4,6 +4,7 @@ import at.ac.tuwien.big.we16.ue2.model.Product;
 import at.ac.tuwien.big.we16.ue2.productdata.JSONDataLoader;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +21,7 @@ import java.util.List;
 public class OverViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Product> products = new ArrayList(JSONDataLoader.getProducts().values());
 
-        request.setAttribute("products", products);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/overview.jsp");
         dispatcher.forward(request, response);
     }

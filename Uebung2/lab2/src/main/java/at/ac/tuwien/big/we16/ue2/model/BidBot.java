@@ -2,6 +2,7 @@ package at.ac.tuwien.big.we16.ue2.model;
 
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Every 10 seconds, this bot automatically makes a higher bid on each product with a probability of 30%.
@@ -11,7 +12,7 @@ public class BidBot implements Runnable {
 
     // Declares the amount by which the current bid shall be raised.
     private static final double RAISE_BY = 1.0;
-    private List<Product> products;
+    private ConcurrentHashMap<Integer, Product> products;
     private User u;
 
     /**
@@ -19,7 +20,7 @@ public class BidBot implements Runnable {
      * @param products List of all products with running auctions.
      * @param u The user assigned to the BidBot
      */
-    public BidBot(List<Product> products, User u) {
+    public BidBot(ConcurrentHashMap<Integer, Product> products, User u) {
         this.products = products;
         this.u = u;
     }
@@ -32,7 +33,7 @@ public class BidBot implements Runnable {
         Random rand = new Random();
         Bid newBid;
 
-        for(Product p:this.products) {
+        for(Product p:this.products.values()) {
             if(rand.nextInt(3) == 2) {
                 newBid = new Bid(this.u, p.getPrice() + this.RAISE_BY);
             }

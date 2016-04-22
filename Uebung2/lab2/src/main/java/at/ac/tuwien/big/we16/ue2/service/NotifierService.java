@@ -22,11 +22,6 @@ public class NotifierService {
         // Use the scheduled executor to regularly check for recently expired auctions
         // and send a notification to all relevant users.
         this.executor = Executors.newSingleThreadScheduledExecutor();
-
-        // Start BidBot every 10 seconds
-        // @TODO: Should this be here, or should it have a seperate service?
-        // @TODO: Add products and user to BidBot.
-        this.executor.scheduleAtFixedRate(new BidBot(null, null), 10, 10, TimeUnit.SECONDS);
     }
 
     /**
