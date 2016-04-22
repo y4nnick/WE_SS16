@@ -37,7 +37,7 @@ public class Product {
         this.bids.push(b);
     }
 
-    public float getPrice() {
+    public double getPrice() {
         if(this.highestBid == null)
             return 0;
 
