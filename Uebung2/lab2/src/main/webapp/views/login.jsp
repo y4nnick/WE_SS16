@@ -1,3 +1,13 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+
+@@ -0,0 +1,85 @@
+  Created by IntelliJ IDEA.
+  User: mstrasser
+  Date: 4/12/16
+  Time: 12:05 PM
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="de">
 <head>
@@ -10,24 +20,10 @@
 
 <a href="#productsheadline" class="accessibility">Zum Inhalt springen</a>
 
-<header aria-labelledby="bannerheadline">
-    <img class="title-image" src="../images/big-logo-small.png" alt="BIG Bid logo">
-
-    <h1 class="header-title" id="bannerheadline">
-        BIG Bid
-    </h1>
-    <nav aria-labelledby="navigationheadline">
-        <h2 class="accessibility" id="navigationheadline">Navigation</h2>
-        <ul class="navigation-list">
-            <li>
-                <a href="" class="button" accesskey="l">Registrieren</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<jsp:include page="header.jsp" flush="true"/>
 <div class="main-container">
     <main aria-labelledby="formheadline">
-        <form class="form" method="post">
+        <form class="form" method="post" action="">
             <h2 id="formheadline" class="registration-headline">Anmelden</h2>
             <div class="form-row">
                 <label class="form-label" for="email-input">
@@ -52,9 +48,7 @@
         </form>
     </main>
 </div>
-<footer>
-    © 2016 BIG Bid
-</footer>
+<jsp:include page="footer.jsp" flush="true"/>
 <script src="/scripts/jquery.js"></script>
 <script src="/scripts/framework.js"></script>
 </body>

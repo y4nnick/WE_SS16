@@ -109,5 +109,7 @@ var socket = new WebSocket("ws://localhost:8080/socket");
 socket.onmessage = function (event) {
 
     /***  write your code here ***/
+    //alert("Message reveived");
+    //console.log(event);
 
 };

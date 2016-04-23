@@ -7,11 +7,13 @@ import com.google.gson.GsonBuilder;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class JSONDataLoader {
 
+    //Stores all products of the system, the key-value is the id from the product
     private static ConcurrentHashMap<Integer, Product> productHashMap = new ConcurrentHashMap<>();
 
     private static Product_Loader products;

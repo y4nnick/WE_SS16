@@ -4,6 +4,7 @@ import at.ac.tuwien.big.we16.ue2.model.BidBot;
 import at.ac.tuwien.big.we16.ue2.model.Product;
 import at.ac.tuwien.big.we16.ue2.model.User;
 import at.ac.tuwien.big.we16.ue2.productdata.JSONDataLoader;
+import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -39,10 +40,9 @@ public final class InitListener implements ServletContextListener {
             this.executor = Executors.newSingleThreadScheduledExecutor();
             ConcurrentHashMap<Integer, Product> products = JSONDataLoader.getProducts();
             application.setAttribute("products", products);
-            User bidBot = new User("BidBot", Integer.MAX_VALUE);
 
             // Start BidBot every 10 seconds
-            this.executor.scheduleAtFixedRate(new BidBot(products, bidBot), 0, 10, TimeUnit.SECONDS);
+            this.executor.scheduleAtFixedRate(new BidBot(products, UserHandler.getBidBot()), 0, 10, TimeUnit.SECONDS);
         }
     }
 

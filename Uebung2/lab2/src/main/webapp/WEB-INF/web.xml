@@ -6,17 +6,8 @@
     <!-- Add your deployment description here -->
 
     <description>This servlet greets its users</description>
-    <display-name>Greeting</display-name>
-    <servlet>
-        <servlet-name>Greeting</servlet-name>
-        <servlet-class>at.ac.tuwien.big.we16.ue2.service.GreetingServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Greeting</servlet-name>
-        <url-pattern>/GreetingServlet</url-pattern>
-    </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>overview</welcome-file>
+        <welcome-file>login</welcome-file>
     </welcome-file-list>
     <listener>
         <listener-class>at.ac.tuwien.big.we16.ue2.service.InitListener</listener-class>

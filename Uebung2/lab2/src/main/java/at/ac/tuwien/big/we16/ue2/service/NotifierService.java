@@ -1,9 +1,12 @@
 package at.ac.tuwien.big.we16.ue2.service;
 
 import at.ac.tuwien.big.we16.ue2.model.BidBot;
+import at.ac.tuwien.big.we16.ue2.model.User;
+import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
@@ -33,7 +36,9 @@ public class NotifierService {
      * logged in in the browser that opened the socket connection.
      */
     public void register(Session socketSession, HttpSession httpSession) {
+        UserHandler.generateUser();
         clients.put(socketSession, httpSession);
+        //sendMessageToUsers(null, "Hallo test");
     }
 
     public void unregister(Session userSession) {
@@ -48,5 +53,19 @@ public class NotifierService {
      */
     public void stop() {
         this.executor.shutdown();
+    }
+
+    public void sendMessageToUsers(ArrayList<User> users, String message){
+
+        for( Session s :clients.keySet()){
+            try{
+                s.getBasicRemote().sendText(message);
+                System.out.println("Message send");
+            }catch (Exception e){
+                System.out.println("Error while sending message to user: " + e.getMessage());
+            }
+        }
+
+
     }
 }
