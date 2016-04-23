@@ -25,6 +25,7 @@ public class NotifierService {
 
     private static Boolean DEBUG = true;
 
+    //Message Type Enum
     private enum MSG_TYPES {
         NEW_BID("NEW_BID"), NEW_HIGHEST_BID("NEW_HIGHEST_BID"), AUCTION_EXPIRED("AUCTION_EXPIRED");
         private final String value;
@@ -40,8 +41,6 @@ public class NotifierService {
     }
 
     private static Map<Session, HttpSession> clients = new ConcurrentHashMap<>();
-    private static Map<User,HttpSession> loggedIn = new ConcurrentHashMap<>();
-
     private final ScheduledExecutorService executor;
 
     /**
@@ -92,7 +91,7 @@ public class NotifierService {
         try{
 
             //Get Session from surpassed bidder
-            ArrayList<User> user = new ArrayList<User>();
+            ArrayList<User> user = new ArrayList();
             user.add(surpassedBidder);
             ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
 
@@ -101,8 +100,8 @@ public class NotifierService {
 
             //Build Json Object
             JsonObject json = new JsonObject();
+            json.addProperty("msgType",MSG_TYPES.NEW_HIGHEST_BID+"");
             json.addProperty("balance",newBalance);
-            json.addProperty("msgType",MSG_TYPES.AUCTION_EXPIRED+"");
 
             //Send
             sendJsonToSessions(json,session);
@@ -117,7 +116,46 @@ public class NotifierService {
      * @param product the product to which the auction was expired
      */
     public static void sendAuctionExpiredNotification(Product product){
-        //TODO send message
+
+        try{
+
+            //Get logged in Users
+            ArrayList<User> loggedInUsers = UserHandler.getLoggedInUsers();
+
+            //Parameter
+            int productID = product.getID();
+            int balance, runningAuctions, lostAuctions, wonAuctions;
+
+            for(User u : loggedInUsers){
+
+                //Get session from user
+                ArrayList<User> user = new ArrayList();
+                user.add(u);
+                ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
+
+                //Get Parameters
+                balance = u.getBalance();
+                runningAuctions = u.getRunningAuctions();
+                lostAuctions = u.getLostAuctions();
+                wonAuctions = u.getWonAuctions();
+
+                //Build Json Object
+                JsonObject json = new JsonObject();
+                json.addProperty("msgType",MSG_TYPES.AUCTION_EXPIRED+"");
+                json.addProperty("product",productID);
+                json.addProperty("balance",balance);
+                json.addProperty("running",runningAuctions);
+                json.addProperty("lost",lostAuctions);
+                json.addProperty("won",wonAuctions);
+
+                //Send
+                sendJsonToSessions(json,session);
+
+            }
+
+        }catch (Exception e){
+            printException(e);
+        }
     }
 
     /**
@@ -139,10 +177,10 @@ public class NotifierService {
 
             //Build Json Object
             JsonObject json = new JsonObject();
+            json.addProperty("msgType",MSG_TYPES.NEW_BID+"");
             json.addProperty("price",price);
             json.addProperty("bidder",bidder);
             json.addProperty("product",productID);
-            json.addProperty("msgType",MSG_TYPES.NEW_BID+"");
 
             //Send
             sendJsonToSessions(json,sessions);
@@ -150,17 +188,6 @@ public class NotifierService {
         }catch (Exception e){
             printException(e);
         }
-    }
-
-    /**
-     * Prints the given exception
-     * @param e the exception
-     */
-    private static void printException(Exception e){
-        StringWriter sw = new StringWriter();
-        e.printStackTrace(new PrintWriter(sw));
-        String exceptionDetails = sw.toString();
-        System.err.println(exceptionDetails);
     }
 
     /**
@@ -201,5 +228,16 @@ public class NotifierService {
             }
 
         }
+    }
+
+    /**
+     * Prints the given exception
+     * @param e the exception
+     */
+    private static void printException(Exception e){
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        String exceptionDetails = sw.toString();
+        System.err.println(exceptionDetails);
     }
 }

@@ -166,7 +166,7 @@ socket.onmessage = function (event) {
 function onAuctionExpired(msg){
     //TODO implement change
 
-
+    updateSideBar(msg.balance,msg.running,msg.won,msg.lost);
 }
 
 /**
@@ -174,42 +174,76 @@ function onAuctionExpired(msg){
  * @param msg the message with the new balance for the user
  */
 function onNewHighestBid(msg){
-    //TODO test when server is implemented
-    $('.balance').text(msg.balance + "€");
+    updateSideBar(msg.balance,null,null,null);
 }
+
 
 /**
  * Gets called when a new bid is placed
  * @param msg the message with the parameters of the new bid
  */
 function onNewBidMessage(msg){
+
     var newPrice = msg.price;
     var bidder = msg.bidder;
     var productID = msg.product;
 
     //Check if overview or details view
-
     if(!inDetailView){
 
+        //Set Price and new highest bidder
         var productDiv = $('[data-product-id='+productID+']');
         productDiv.find('.product-price').text(newPrice + "€");
         productDiv.find('.product-highest').text(bidder);
-//
-        productDiv.find(".product").addClass("highlightOwn");
-        setTimeout(function() {productDiv.find(".product").removeClass("highlightOwn");}, 1200);
 
-    }else if(idparam == productID){
+        //Animate update
+        productDiv.find(".product").addClass("highlightUpdate");
+        setTimeout(function() {productDiv.find(".product").removeClass("highlightUpdate");}, 1200);
 
-        $(".bid-form").addClass("highlightOwn");
-        setTimeout(function() {$(".bid-form").removeClass("highlightOwn");}, 1200);
+    }else if(idparam == productID){     //Check if details view of product
+
+        //Set Price and new highest bidder
         $('.highest-bid').text(newPrice + "€");
         $('.highest-bidder').text(bidder);
+
+        //Animate update
+        $(".bid-form").addClass("highlightUpdate");
+        setTimeout(function() {$(".bid-form").removeClass("highlightUpdate");}, 1200);
 
     }
 }
 
-function callback() {
-    setTimeout(function() {
-        $( "#effect" ).removeAttr( "style" ).hide().fadeIn();
-    }, 1000 );
-};
+/**
+ * Updates the sidebar of the current user
+ * @param balance the new balance or null if not updated
+ * @param running the new running auctions count or null if not updated
+ * @param won the new won auctions count or null if not updated
+ * @param lost the new lost auctions count or null if not updated
+ */
+function updateSideBar(balance, running, won, lost){
+
+    //Update values
+    var update = (balance != null || running != null || won != null || lost != null);
+
+    if(balance != null){
+        $('.balance').text(balance + "€");
+    }
+
+    if(running != null){
+        $('.running-auctions-count').text(running);
+    }
+
+    if(won != null){
+        $('.won-auctions-count').text(won);
+    }
+
+    if(lost != null){
+        $('.lost-auctions-count').text(lost);
+    }
+
+    //Animate update
+    if(update){
+        $(".user-info-container").addClass("highlightUpdate");
+        setTimeout(function() {$(".user-info-container").removeClass("highlightUpdate");}, 1200);
+    }
+}

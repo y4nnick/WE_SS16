@@ -8,7 +8,7 @@
 <% User currentUser = (User) (session.getAttribute("currentSessionUser"));%>
 
 <aside class="sidebar" aria-labelledby="userinfoheadline">
-    <div class="user-info-container">
+    <div class="user-info-container transition">
         <h2 class="accessibility" id="userinfoheadline">Benutzerdaten</h2>
         <dl class="user-data properties">
             <dt class="accessibility">Name:</dt>
