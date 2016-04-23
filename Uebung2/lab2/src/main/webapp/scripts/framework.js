@@ -200,6 +200,8 @@ function onNewBidMessage(msg){
 
     }else if(idparam == productID){
 
+        $(".bid-form").addClass("highlightOwn");
+        setTimeout(function() {$(".bid-form").removeClass("highlightOwn");}, 1200);
         $('.highest-bid').text(newPrice + "€");
         $('.highest-bidder').text(bidder);
 

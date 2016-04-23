@@ -116,6 +116,11 @@ footer {
     margin: 0;
     padding: 30px;
     background: rgba(204, 204, 204, 0.38);
+
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
 }
 
 .bid-form-field {
