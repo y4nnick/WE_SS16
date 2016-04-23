@@ -124,18 +124,38 @@ socket.onmessage = function (event) {
 };
 
 function onNewBidMessage(msg){
-
     var newPrice = msg.price;
     var bidder = msg.bidder;
     var productID = msg.product;
 
-    console.log("id: " + productID);
+    //Check if overview or details view
+    var idparam = getUrlParameter("id");
+    if(typeof idparam === 'undefined'){
 
-    var productDiv = $('[data-product-id='+productID+']');
-    productDiv.find('.product-price').text(newPrice + " €");
-    productDiv.find('.product-highest').text(bidder);
-    
-    productDiv.effect("highlight", {}, 3000);
+        var productDiv = $('[data-product-id='+productID+']');
+        productDiv.find('.product-price').text(newPrice + " €");
+        productDiv.find('.product-highest').text(bidder);
+       // productDiv.toggle( "highlight" );
 
+    }else if(idparam == productID){
 
+        $('.highest-bid').text(newPrice + " €");
+        $('.highest-bidder').text(bidder);
+
+    }
 }
+
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
