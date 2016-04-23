@@ -7,8 +7,8 @@
  * Validierung am Server, ob Gebot höher als aktuelles Gebot ist
  *     if false --> Fehlermeldung auf Detailseite -check
  *     if true ---> Kontostand und Aktionszähler aktualisiert & mit
- *         mit neuem Gebot am Server gespeichert
- * AKTIONSSZÄHLER: nur bei der ersten Teilnahme erhöht, nach
+ *         mit neuem Gebot am Server gespeichert -check
+ * AKTIONSSZÄHLER: nur bei der ersten Teilnahme erhöht, -check nach
  *     Ablauf der Aktion Aktionszähler verringert & Gewinn-/Verlustzähler
  *     erhöht
  * Ajax-Response: Anzahl laufender Aktionen, Kontostand
@@ -38,9 +38,13 @@ $(document).ready(function () {
             type: 'POST',
             url: '/bidding',
             data: JSON.stringify(data),
-            success: function (newPrice) {
+            success: function (response) {
+                var data = JSON.parse(response);
                 $(".bid-error").hide();
-                $highestPrice.html('<label> Highest:' + newPrice + '</label>');
+
+                $highestPrice.html('<label> Highest:' + data.price + '</label>');
+                $(".balance").html(data.balance + "€");
+                $(".running-auctions-count").html(data.running);
             },
             error: function (error) {
                 $(".bid-error").show();

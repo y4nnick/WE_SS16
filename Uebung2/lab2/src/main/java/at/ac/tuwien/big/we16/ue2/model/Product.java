@@ -47,7 +47,7 @@ public class Product {
     }
 
     public void addBid(User u, float price) {
-        Bid b = new Bid(u, price);
+        Bid b = new Bid(this, u, price);
         addBid(b);
     }
 

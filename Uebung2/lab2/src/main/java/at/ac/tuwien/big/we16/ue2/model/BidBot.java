@@ -34,8 +34,7 @@ public class BidBot implements Runnable {
 
         for(Product p:this.products.values()) {
             if(p.isRunning() && rand.nextInt(3) == 2) {
-                newBid = new Bid(UserHandler.getBidBot(), p.getPrice() + this.RAISE_BY);
-                newBid.setProduct(p);
+                newBid = new Bid(p, UserHandler.getBidBot(), p.getPrice() + this.RAISE_BY);
 
                 NotifierService.sendNewBidNotification(newBid);
 

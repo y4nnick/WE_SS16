@@ -18,7 +18,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private int balance;
+    private float balance;
     private List<Bid> bids_running = new LinkedList<Bid>();
     private List<Bid> bids_won = new LinkedList<Bid>();
     private List<Bid> bids_lost = new LinkedList<Bid>();
@@ -36,7 +36,7 @@ public class User {
         return this.name;
     }
 
-    public int getBalance() {
+    public float getBalance() {
         return this.balance;
     }
 
@@ -87,4 +87,8 @@ public class User {
     public Boolean isLoggedIn(){
         return this.httpSession != null;
     }
+
+    public void setBalance(float newBalance) {this.balance = newBalance; }
+
+    public List<Bid> getRunningActionsList(){return bids_running; }
 }

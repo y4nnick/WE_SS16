@@ -8,8 +8,9 @@ public class Bid {
     private User user;
     private double price;
 
-    public Bid(User u, double price) {
-        this.user = u;
+    public Bid(Product product, User user, double price) {
+        this.product = product;
+        this.user = user;
         this.price = price;
     }
 
@@ -24,4 +25,6 @@ public class Bid {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public void setPrice(double newPrice) {this.price = newPrice; }
 }
