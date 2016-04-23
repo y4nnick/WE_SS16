@@ -15,7 +15,7 @@
         <h2 class="accessibility" id="navigationheadline">Navigation</h2>
         <ul class="navigation-list">
             <li>
-                <a href="" class="button" accesskey="l">Abmelden</a>
+                <a href="../login" class="button" accesskey="l">Abmelden</a>
             </li>
         </ul>
     </nav>
