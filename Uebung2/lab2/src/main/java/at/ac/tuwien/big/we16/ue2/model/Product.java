@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Stack;
 
 /**
+ * @TODO: Check enddate regularly and set isRunning to false if needed
  * Created by mstrasser on 4/12/16.
  */
 public class Product {
@@ -15,6 +16,7 @@ public class Product {
     private Stack<Bid> bids = new Stack<Bid>();
 
     private Date auctionEnd;
+    private boolean isRunning = true;
 
     public Product(Integer ID, String name, String img, int year) {
         this.id = ID;
@@ -60,4 +62,6 @@ public class Product {
     public void setAuctionEnd(Date auctionEnd) {
         this.auctionEnd = auctionEnd;
     }
+
+    public boolean isRunning() { return this.isRunning; }
 }

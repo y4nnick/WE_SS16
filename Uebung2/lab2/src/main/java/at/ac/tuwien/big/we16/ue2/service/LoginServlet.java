@@ -28,13 +28,14 @@ public class LoginServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    // @TODO: Notify user if login failed
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, java.io.IOException {
 
         try
         {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            User user = UserHandler.findUser(email,password);
+            User user = UserHandler.findUser(email, password);
 
             if(user == null){
                 System.out.println("User not found");

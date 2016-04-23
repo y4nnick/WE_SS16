@@ -5,6 +5,7 @@
   Time: 12:31 PM
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%-- @TODO: NullPointer if session not started! --%>
 <% User currentUser = (User) (session.getAttribute("currentSessionUser"));%>
 
 <%--<jsp:useBean id="user" scope="session" class="at.ac.tuwien.big.we16.ue2.model.User"/>--%>
