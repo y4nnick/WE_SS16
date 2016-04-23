@@ -1,13 +1,17 @@
 package at.ac.tuwien.big.we16.ue2.service;
 
+import at.ac.tuwien.big.we16.ue2.model.Bid;
 import at.ac.tuwien.big.we16.ue2.model.BidBot;
 import at.ac.tuwien.big.we16.ue2.model.User;
 import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import java.awt.image.AreaAveragingScaleFilter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -15,6 +19,8 @@ import java.util.concurrent.TimeUnit;
 
 public class NotifierService {
     private static Map<Session, HttpSession> clients = new ConcurrentHashMap<>();
+    private static Map<User,HttpSession> loggedIn = new ConcurrentHashMap<>();
+
     private final ScheduledExecutorService executor;
 
     /**
@@ -55,6 +61,32 @@ public class NotifierService {
      */
     public void stop() {
         this.executor.shutdown();
+    }
+
+    public static void sendNewBidNotificaiton(Bid bid){
+
+        ArrayList<Session> sessions = NotifierService.getSessionsFromUsers(UserHandler.getLoggedInUsers());
+
+        //Build message
+        String message = "new bid";
+
+        //Send to users
+
+    }
+
+    private static ArrayList<Session> getSessionsFromUsers(ArrayList<User> users){
+        ArrayList<Session> sessions = new ArrayList<>();
+
+        for(User u : users){
+            for (Session session : clients.keySet()) {
+                HttpSession httpSession = clients.get(session);
+                if(u.getHttpSession().equals(httpSession)){
+                    sessions.add(session);
+                }
+            }
+        }
+
+        return sessions;
     }
 
     public void sendMessageToUsers(ArrayList<User> users, String message){

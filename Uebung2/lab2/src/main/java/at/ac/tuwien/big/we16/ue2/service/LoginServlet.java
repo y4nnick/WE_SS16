@@ -50,9 +50,9 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
 
-
             HttpSession session = request.getSession(true);
             session.setAttribute("currentSessionUser",user);
+            user.setHttpSession(session);
 
             response.sendRedirect("overview");
         }

@@ -2,6 +2,7 @@ package at.ac.tuwien.big.we16.ue2.model;
 
 import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 
+import javax.servlet.http.HttpSession;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class User {
     private List<Bid> bids_running = new LinkedList<Bid>();
     private List<Bid> bids_won = new LinkedList<Bid>();
     private List<Bid> bids_lost = new LinkedList<Bid>();
+    private HttpSession httpSession = null; //TODO set null on logout
 
     public User(int id, String name,String email,String password,int balance) {
         this.id = id;
@@ -72,5 +74,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public HttpSession getHttpSession() {
+        return httpSession;
+    }
+
+    public void setHttpSession(HttpSession httpSession) {
+        this.httpSession = httpSession;
+    }
+
+    public Boolean isLoggedIn(){
+        return this.httpSession != null;
     }
 }

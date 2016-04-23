@@ -1,5 +1,7 @@
 package at.ac.tuwien.big.we16.ue2.model;
 
+import at.ac.tuwien.big.we16.ue2.service.NotifierService;
+
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -37,6 +39,8 @@ public class BidBot implements Runnable {
             if(p.isRunning() && rand.nextInt(3) == 2) {
                 newBid = new Bid(this.u, p.getPrice() + this.RAISE_BY);
                 newBid.setProduct(p);
+
+                NotifierService.sendNewBidNotificaiton(newBid);
 
                 p.addBid(newBid);
             }

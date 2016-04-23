@@ -2,8 +2,10 @@ package at.ac.tuwien.big.we16.ue2.productdata;
 
 import at.ac.tuwien.big.we16.ue2.model.User;
 
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -86,5 +88,21 @@ public class UserHandler {
      */
     public static User getBidBot(){
         return bidBot;
+    }
+
+    /**
+     * Returns all users who are currently logged in
+     * @return all logged in users
+     */
+    public static ArrayList<User> getLoggedInUsers(){
+        ArrayList<User> loggedInUsers = new ArrayList<>();
+
+        for(User u : users.values()){
+            if(u.isLoggedIn()){
+                loggedInUsers.add(u);
+            }
+        }
+
+        return loggedInUsers;
     }
 }
