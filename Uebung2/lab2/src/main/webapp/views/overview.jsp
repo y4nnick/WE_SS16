@@ -36,7 +36,7 @@
                             <dd class="product-name">${product.getName()}</dd>
                             <dt>Preis</dt>
                             <dd class="product-price">
-                                    ${product.getPrice()}
+                                    ${product.getPrice()} €
                             </dd>
                             <dt>Verbleibende Zeit</dt>
                             <dd data-end-time="2016,03,14,14,30,23,288" data-end-text="abgelaufen"

@@ -7,7 +7,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% User currentUser = (User) (session.getAttribute("currentSessionUser"));%>
 
-<%--<jsp:useBean id="user" scope="session" class="at.ac.tuwien.big.we16.ue2.model.User"/>--%>
 <aside class="sidebar" aria-labelledby="userinfoheadline">
     <div class="user-info-container">
         <h2 class="accessibility" id="userinfoheadline">Benutzerdaten</h2>

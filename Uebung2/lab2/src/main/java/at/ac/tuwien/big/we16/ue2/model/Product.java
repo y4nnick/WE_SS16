@@ -25,6 +25,23 @@ public class Product {
         this.year = year;
     }
 
+    public String getHighestBidName(){
+        if(!hasBid()){
+            return "";
+        }
+
+        //TODO warum ist beim highest bit kein user eingetragen? Sollte eg der Bot sein
+        if(this.highestBid.getUser() == null){
+            return "User in highest Bid == null";
+        }
+
+        return this.highestBid.getUser().getName();
+    }
+
+    public Boolean hasBid(){
+        return (this.highestBid != null);
+    }
+
     public Bid getTopBid() { return this.highestBid; }
 
     public void addBid(Bid b) {
