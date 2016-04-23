@@ -3,7 +3,6 @@ package at.ac.tuwien.big.we16.ue2.model;
 import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 import at.ac.tuwien.big.we16.ue2.service.NotifierService;
 
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
