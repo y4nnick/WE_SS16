@@ -4,10 +4,13 @@ import at.ac.tuwien.big.we16.ue2.model.Bid;
 import at.ac.tuwien.big.we16.ue2.model.BidBot;
 import at.ac.tuwien.big.we16.ue2.model.User;
 import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
+import com.google.gson.JsonObject;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 import java.awt.image.AreaAveragingScaleFilter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
@@ -18,6 +21,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class NotifierService {
+
+    private static Boolean DEBUG = true;
+
     private static Map<Session, HttpSession> clients = new ConcurrentHashMap<>();
     private static Map<User,HttpSession> loggedIn = new ConcurrentHashMap<>();
 
@@ -42,11 +48,8 @@ public class NotifierService {
      * logged in in the browser that opened the socket connection.
      */
     public void register(Session socketSession, HttpSession httpSession) {
-        System.out.println("NotifierService: register");
         UserHandler.generateUser();
-
         clients.put(socketSession, httpSession);
-        //sendMessageToUsers(null, "Hallo test");
     }
 
     public void unregister(Session userSession) {
@@ -63,17 +66,48 @@ public class NotifierService {
         this.executor.shutdown();
     }
 
+
     public static void sendNewBidNotificaiton(Bid bid){
 
-        ArrayList<Session> sessions = NotifierService.getSessionsFromUsers(UserHandler.getLoggedInUsers());
+        try{
+            //Get Sessions from logged in sers
+            ArrayList<User> loggedInUsers = UserHandler.getLoggedInUsers();
+            ArrayList<Session> sessions = NotifierService.getSessionsFromUsers(loggedInUsers);
 
-        //Build message
-        String message = "new bid";
+            //Get Parameters
+            Double price = bid.getPrice();
+            String bidder = (bid.getUser() != null)?bid.getUser().getName():"User of bid is null";
+            Integer productID = bid.getProduct().getID();
 
-        //Send to users
+            //Build Json Object
+            JsonObject json = new JsonObject();
+            json.addProperty("price",price);
+            json.addProperty("bidder",bidder);
+            json.addProperty("product",productID);
 
+            //Send
+            sendJsonToSessions(json,sessions);
+        }catch (Exception e){
+            printException(e);
+        }
     }
 
+    /**
+     * Prints the given exception
+     * @param e the exception
+     */
+    private static void printException(Exception e){
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        String exceptionDetails = sw.toString();
+        System.err.println(exceptionDetails);
+    }
+
+    /**
+     * Gets the Sessions from the given users
+     * @param users the users
+     * @return the sessions from the users
+     */
     private static ArrayList<Session> getSessionsFromUsers(ArrayList<User> users){
         ArrayList<Session> sessions = new ArrayList<>();
 
@@ -89,17 +123,23 @@ public class NotifierService {
         return sessions;
     }
 
-    public void sendMessageToUsers(ArrayList<User> users, String message){
+    /**
+     * Sends the given json-object to the given sessions
+     * @param json the json-Object
+     * @param sessions the session
+     */
+    private static void sendJsonToSessions(JsonObject json, ArrayList<Session> sessions){
+        for( Session s :sessions){
+            synchronized (s) {
+                try{
+                    if(DEBUG)System.out.println("Send to websocket #"+s.getId()+" | Message: " + json);
+                    s.getBasicRemote().sendText(json.toString());
+                }catch (Exception e){
+                    printException(e);
+                }
 
-        for( Session s :clients.keySet()){
-            try{
-                s.getBasicRemote().sendText(message);
-                System.out.println("Message send");
-            }catch (Exception e){
-                System.out.println("Error while sending message to user: " + e.getMessage());
             }
+
         }
-
-
     }
 }

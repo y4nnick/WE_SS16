@@ -106,10 +106,10 @@ function formatCurrency(x) {
 // Depending on the setup of your server, servlet, and socket, you may have to
 // change the URL.
 var socket = new WebSocket("ws://localhost:8080/socket");
-/*socket.onmessage = function (event) {
+socket.onmessage = function (event) {
 
     /***  write your code here ***/
     //alert("Message reveived");
-    //console.log(event);
+    console.log(event.data);
 
-//};
+};
