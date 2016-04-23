@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,11 +22,17 @@ public class DetailViewServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int product_id = Integer.parseInt(request.getParameter("id").toString());
-        Product product = JSONDataLoader.getById(product_id);
-        request.setAttribute("product", product);
+        HttpSession session = request.getSession(true);
+        Object obj = session.getAttribute("currentSessionUser");
+        if(obj == null) {
+            response.sendRedirect("/");
+        } else {
+            int product_id = Integer.parseInt(request.getParameter("id").toString());
+            Product product = JSONDataLoader.getById(product_id);
+            request.setAttribute("product", product);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/details.jsp");
-        dispatcher.forward(request, response);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/details.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 }
