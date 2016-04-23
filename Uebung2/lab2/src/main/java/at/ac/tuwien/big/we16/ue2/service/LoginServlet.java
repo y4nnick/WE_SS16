@@ -24,8 +24,15 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/login.jsp");
-        dispatcher.forward(request, response);
+
+        HttpSession session = request.getSession(true);
+        Object obj = session.getAttribute("currentSessionUser");
+        if(obj == null) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/views/login.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            response.sendRedirect("/overview");
+        }
     }
 
     // @TODO: Notify user if login failed
