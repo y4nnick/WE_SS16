@@ -32,7 +32,7 @@
         <div class="products">
             <c:forEach items="${products.values()}" var="product">
                 <div class="product-outer transition" data-product-id="${product.getID()}">
-                    <a href="details?id=${product.getID()}" class="product transition <%--expired--%> " title="Mehr Informationen zu ${product.getName()}">
+                    <a href="details?id=${product.getID()}" class="product transition ${(product.isRunning())?"":"expired"} <%--expired--%> " title="Mehr Informationen zu ${product.getName()}">
                         <img class="product-image" src="images/${product.getImg()}" alt="">
                         <dl class="product-properties properties">
                             <dt>Bezeichnung</dt>
@@ -42,7 +42,7 @@
                                     ${product.getPrice()} €
                             </dd>
                             <dt>Verbleibende Zeit</dt>
-                            <dd data-end-time="2016,03,14,14,30,23,288" data-end-text="abgelaufen"
+                            <dd data-end-time="${product.getAuctionEndString()}" data-end-text="abgelaufen"
                                 class="product-time js-time-left"></dd>
                             <dt>Höchstbietende/r</dt>
                             <dd class="product-highest">${product.getHighestBidName()}</dd>

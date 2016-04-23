@@ -1,10 +1,11 @@
 package at.ac.tuwien.big.we16.ue2.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Stack;
 
 /**
- * @TODO: Check enddate regularly and set isRunning to false if needed
  * Created by mstrasser on 4/12/16.
  */
 public class Product {
@@ -26,12 +27,9 @@ public class Product {
     }
 
     public String getHighestBidName(){
-        if(!hasBid()){
-            return "Noch kein Gebot";
-        }
 
-        if(this.highestBid.getUser() == null){
-            return "User in highest Bid == null";
+        if(this.highestBid == null || this.highestBid.getUser() == null){
+            return "Kein Gebot";
         }
 
         return this.highestBid.getUser().getName();
@@ -72,10 +70,23 @@ public class Product {
     public Date getAuctionEnd() {
         return auctionEnd;
     }
-
     public void setAuctionEnd(Date auctionEnd) {
         this.auctionEnd = auctionEnd;
     }
 
+    /**
+     * Returns the Auction end date in the format YYYY,MM,dd,HH,mm,ss,SSS
+     * @return the Auction end date in the format YYYY,MM,dd,HH,mm,ss,SSS
+     */
+    public String getAuctionEndString(){
+        //2016,03,14,14,30,23,288
+        // endTime = new Date(endTime[0],endTime[1]-1,endTime[2],endTime[3],endTime[4],endTime[5],endTime[6]);
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY,MM,dd,HH,mm,ss,SSS");
+        return sdf.format(auctionEnd);
+    }
+
     public boolean isRunning() { return this.isRunning; }
+    public void setRunning(boolean running) {
+        isRunning = running;
+    }
 }

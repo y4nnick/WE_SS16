@@ -7,8 +7,7 @@ import com.google.gson.GsonBuilder;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class JSONDataLoader {
@@ -49,6 +48,28 @@ public class JSONDataLoader {
             productHashMap.put(id,new Movie(id, m.getTitle(),m.getDirector(), m.getImg(), Integer.valueOf(m.getYear())));
             id++;
         }
+
+        //Set auction end dates
+        for(Product p: productHashMap.values()){
+            p.setAuctionEnd(getRandomDateInFuture());
+        }
+    }
+
+    /**
+     * Returns a Date which is between 1 and 9 Minutes in the future
+     * @return a Date which is between 1 and 9 Minutes in the future
+     */
+    private static Date getRandomDateInFuture(){
+
+        //Generate Number between 1 and 9
+        Random ran = new Random();
+        int minutesOffset = ran.nextInt(9) + 1;
+
+        //Add minutes to current Time
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE,minutesOffset);
+
+        return cal.getTime();
     }
 
     private static Music_Loader[] getMusic() {

@@ -34,11 +34,11 @@
                 <p>
                     Diese Auktion ist bereits abgelaufen.
                     Das Produkt wurde um
-                    <span class="highest-bid">149,08 €</span> an
-                    <span class="highest-bidder">Jane Doe</span> verkauft.
+                    <span class="highest-bid">${product.getPrice()} €</span> an
+                    <span class="highest-bidder">${product.getHighestBidName()}</span> verkauft.
                 </p>
             </div>
-            <p class="detail-time">Restzeit: <span data-end-time="2016,03,14,15,05,19,796" class="detail-rest-time js-time-left"></span>
+            <p class="detail-time">Restzeit: <span data-end-time="${product.getAuctionEndString()}" class="detail-rest-time js-time-left"></span>
             </p>
             <form class="bid-form" method="post" action="">
 

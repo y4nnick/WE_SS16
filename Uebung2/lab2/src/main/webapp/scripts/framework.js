@@ -107,7 +107,7 @@ function writeNewText(el, secs) {
         el.parents(".product").addClass("expired");
     }
 }
-/*$(".js-time-left").each(function() {
+$(".js-time-left").each(function() {
     var endTime = $(this).data("end-time").split(",");
     endTime = new Date(endTime[0],endTime[1]-1,endTime[2],endTime[3],endTime[4],endTime[5],endTime[6]);
     var today = new Date();
@@ -120,7 +120,7 @@ function writeNewText(el, secs) {
         }
         writeNewText(that, diffS);
     }, 1000);
-});*/
+});
 
 function formatCurrency(x) {
     // regex from http://stackoverflow.com/a/2901298
@@ -153,6 +153,7 @@ socket.onmessage = function (event) {
             break;
         case MSG_TYPE.AUCTION_EXPIRED:
             onAuctionExpired(msg);
+            break;
         default:
             console.log("Unknown message type: " + msgType);
             break;
@@ -164,9 +165,14 @@ socket.onmessage = function (event) {
  * @param msg the message with the new parameters for the user
  */
 function onAuctionExpired(msg){
-    //TODO implement change
 
     updateSideBar(msg.balance,msg.running,msg.won,msg.lost);
+
+    if(inDetailView && idparam == msg.product){
+        $(".auction-expired-text").show();
+        $(".detail-time").hide();
+        $(".bid-form").hide();
+    }
 }
 
 /**
@@ -176,7 +182,6 @@ function onAuctionExpired(msg){
 function onNewHighestBid(msg){
     updateSideBar(msg.balance,null,null,null);
 }
-
 
 /**
  * Gets called when a new bid is placed
