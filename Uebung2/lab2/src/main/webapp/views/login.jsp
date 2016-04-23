@@ -15,6 +15,7 @@
     <title>BIG Bid - Anmelden</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../styles/style.css">
+    <script src="../scripts/framework.js"></script>
 </head>
 <body data-decimal-separator="," data-grouping-separator=".">
 

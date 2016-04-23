@@ -36,7 +36,9 @@ public class NotifierService {
      * logged in in the browser that opened the socket connection.
      */
     public void register(Session socketSession, HttpSession httpSession) {
+        System.out.println("NotifierService: register");
         UserHandler.generateUser();
+
         clients.put(socketSession, httpSession);
         //sendMessageToUsers(null, "Hallo test");
     }

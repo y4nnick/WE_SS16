@@ -42,15 +42,17 @@ public class LoginServlet extends HttpServlet {
                 return;
             }
 
+
             HttpSession session = request.getSession(true);
             session.setAttribute("currentSessionUser",user);
-
 
             response.sendRedirect("overview");
         }
         catch (Throwable theException)
         {
-            System.out.println(theException);
+
+            System.out.println(theException.getMessage());
+            System.out.println(theException.getStackTrace());
             response.sendRedirect("login");
         }
     }
