@@ -2,9 +2,7 @@ package at.ac.tuwien.big.we16.ue2.productdata;
 
 import at.ac.tuwien.big.we16.ue2.model.User;
 
-import java.lang.reflect.Array;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -12,6 +10,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * Created by Yannick on Samstag23.04.16.
  */
 public class UserHandler {
+
+    private static Boolean DEBUG = true;
 
     //Stores all users of the system, the key-value is the id from the user
     private static ConcurrentHashMap<Integer,User> users = new ConcurrentHashMap<>();
@@ -28,11 +28,13 @@ public class UserHandler {
     public static User findUser(String email, String password){
 
         if(email == null || email.isEmpty()){
+            if(DEBUG)System.err.println("email is empty");
             return null;
         }
 
         //Bot is not allowed to login
         if(email.equals(bidBot.getEmail())){
+            if(DEBUG)System.err.println("Bot is not allowed to login");
             return null;
         }
 
@@ -42,6 +44,7 @@ public class UserHandler {
             }
         }
 
+        if(DEBUG)System.err.println("No user match");
         return null;
     }
 

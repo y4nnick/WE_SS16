@@ -40,7 +40,7 @@ public class BidBot implements Runnable {
                 newBid = new Bid(this.u, p.getPrice() + this.RAISE_BY);
                 newBid.setProduct(p);
 
-                NotifierService.sendNewBidNotificaiton(newBid);
+                NotifierService.sendNewBidNotification(newBid);
 
                 p.addBid(newBid);
             }

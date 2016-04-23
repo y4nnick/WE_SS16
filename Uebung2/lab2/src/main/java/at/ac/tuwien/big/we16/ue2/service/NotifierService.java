@@ -2,6 +2,7 @@ package at.ac.tuwien.big.we16.ue2.service;
 
 import at.ac.tuwien.big.we16.ue2.model.Bid;
 import at.ac.tuwien.big.we16.ue2.model.BidBot;
+import at.ac.tuwien.big.we16.ue2.model.Product;
 import at.ac.tuwien.big.we16.ue2.model.User;
 import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 import com.google.gson.JsonObject;
@@ -23,6 +24,20 @@ import java.util.concurrent.TimeUnit;
 public class NotifierService {
 
     private static Boolean DEBUG = true;
+
+    private enum MSG_TYPES {
+        NEW_BID("NEW_BID"), NEW_HIGHEST_BID("NEW_HIGHEST_BID"), AUCTION_EXPIRED("AUCTION_EXPIRED");
+        private final String value;
+
+        MSG_TYPES(String val){
+            this.value = val;
+        }
+
+        @Override
+        public String toString(){
+            return this.value;
+        }
+    }
 
     private static Map<Session, HttpSession> clients = new ConcurrentHashMap<>();
     private static Map<User,HttpSession> loggedIn = new ConcurrentHashMap<>();
@@ -48,6 +63,7 @@ public class NotifierService {
      * logged in in the browser that opened the socket connection.
      */
     public void register(Session socketSession, HttpSession httpSession) {
+        if(DEBUG)System.out.println("Notifier Service in register");
         UserHandler.generateUser();
         clients.put(socketSession, httpSession);
     }
@@ -68,13 +84,51 @@ public class NotifierService {
 
 
     /**
+     * Sends a new highest Bid notification to the surpassed bidder
+     * @param surpassedBidder the surpassed bidder
+     */
+    public static void sendNewHighestBidNotification(User surpassedBidder){
+
+        try{
+
+            //Get Session from surpassed bidder
+            ArrayList<User> user = new ArrayList<User>();
+            user.add(surpassedBidder);
+            ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
+
+            //Get parameters
+            int newBalance = surpassedBidder.getBalance();
+
+            //Build Json Object
+            JsonObject json = new JsonObject();
+            json.addProperty("balance",newBalance);
+            json.addProperty("msgType",MSG_TYPES.AUCTION_EXPIRED+"");
+
+            //Send
+            sendJsonToSessions(json,session);
+
+        }catch (Exception e){
+            printException(e);
+        }
+    }
+
+    /**
+     * Sends a auction expired Notification to all users
+     * @param product the product to which the auction was expired
+     */
+    public static void sendAuctionExpiredNotification(Product product){
+        //TODO send message
+    }
+
+    /**
      * Sends a new bid Notification to all logged in clients
      * @param bid the new bid
      */
-    public static void sendNewBidNotificaiton(Bid bid){
+    public static void sendNewBidNotification(Bid bid){
 
         try{
-            //Get Sessions from logged in sers
+
+            //Get Sessions from logged in users
             ArrayList<User> loggedInUsers = UserHandler.getLoggedInUsers();
             ArrayList<Session> sessions = NotifierService.getSessionsFromUsers(loggedInUsers);
 
@@ -88,10 +142,11 @@ public class NotifierService {
             json.addProperty("price",price);
             json.addProperty("bidder",bidder);
             json.addProperty("product",productID);
-            json.addProperty("msgType","newBid");
+            json.addProperty("msgType",MSG_TYPES.NEW_BID+"");
 
             //Send
             sendJsonToSessions(json,sessions);
+
         }catch (Exception e){
             printException(e);
         }

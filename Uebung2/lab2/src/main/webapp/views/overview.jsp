@@ -16,6 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/jquery-ui.css">
+    <script src="../scripts/jquery.js"></script>
+    <script src="../scripts/jquery-ui.js"></script>
     <script src="../scripts/framework.js"></script>
 </head>
 <body data-decimal-separator="," data-grouping-separator=".">
@@ -29,8 +31,8 @@
         <h2 class="main-headline" id="productsheadline">Produkte</h2>
         <div class="products">
             <c:forEach items="${products.values()}" var="product">
-                <div class="product-outer" data-product-id="${product.getID()}">
-                    <a href="details?id=${product.getID()}" class="product expired " title="Mehr Informationen zu ${product.getName()}">
+                <div class="product-outer transition" data-product-id="${product.getID()}">
+                    <a href="details?id=${product.getID()}" class="product transition <%--expired--%> " title="Mehr Informationen zu ${product.getName()}">
                         <img class="product-image" src="images/${product.getImg()}" alt="">
                         <dl class="product-properties properties">
                             <dt>Bezeichnung</dt>
