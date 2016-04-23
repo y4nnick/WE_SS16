@@ -64,6 +64,14 @@ public class NotifierService {
     public void register(Session socketSession, HttpSession httpSession) {
         if(DEBUG)System.out.println("Notifier Service in register");
         UserHandler.generateUser();
+
+        //Make sure that no client gets registerd twice
+        for(HttpSession httpSession1 : clients.values()){
+            if(httpSession1.equals(httpSession)){
+                return;
+            }
+        }
+
         clients.put(socketSession, httpSession);
     }
 

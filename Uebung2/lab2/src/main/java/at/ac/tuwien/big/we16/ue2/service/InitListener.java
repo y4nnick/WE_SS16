@@ -42,7 +42,7 @@ public final class InitListener implements ServletContextListener {
             application.setAttribute("products", products);
 
             // Start BidBot every 10 seconds
-            this.executor.scheduleAtFixedRate(new BidBot(products, UserHandler.getBidBot()), 0, 10, TimeUnit.SECONDS);
+            this.executor.scheduleAtFixedRate(new BidBot(products), 0, 10, TimeUnit.SECONDS);
         }
     }
 

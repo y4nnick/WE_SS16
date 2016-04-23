@@ -1,5 +1,6 @@
 package at.ac.tuwien.big.we16.ue2.model;
 
+import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 import at.ac.tuwien.big.we16.ue2.service.NotifierService;
 
 import java.util.List;
@@ -15,16 +16,13 @@ public class BidBot implements Runnable {
     // Declares the amount by which the current bid shall be raised.
     private static final double RAISE_BY = 1.0;
     private ConcurrentHashMap<Integer, Product> products;
-    private User u;
 
     /**
      * Constructor for BidBot
      * @param products List of all products with running auctions.
-     * @param u The user assigned to the BidBot
      */
-    public BidBot(ConcurrentHashMap<Integer, Product> products, User u) {
+    public BidBot(ConcurrentHashMap<Integer, Product> products) {
         this.products = products;
-        this.u = u;
     }
 
     @Override
@@ -37,7 +35,7 @@ public class BidBot implements Runnable {
 
         for(Product p:this.products.values()) {
             if(p.isRunning() && rand.nextInt(3) == 2) {
-                newBid = new Bid(this.u, p.getPrice() + this.RAISE_BY);
+                newBid = new Bid(UserHandler.getBidBot(), p.getPrice() + this.RAISE_BY);
                 newBid.setProduct(p);
 
                 NotifierService.sendNewBidNotification(newBid);

@@ -45,7 +45,7 @@
                             <dd data-end-time="2016,03,14,14,30,23,288" data-end-text="abgelaufen"
                                 class="product-time js-time-left"></dd>
                             <dt>Höchstbietende/r</dt>
-                            <dd class="product-highest">Jane Doe</dd>
+                            <dd class="product-highest">${product.getHighestBidName()}</dd>
                         </dl>
                     </a>
                 </div>
