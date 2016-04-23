@@ -107,9 +107,35 @@ function formatCurrency(x) {
 // change the URL.
 var socket = new WebSocket("ws://localhost:8080/socket");
 socket.onmessage = function (event) {
+    var msg = jQuery.parseJSON(event.data);
+    var msgType = msg.msgType;
 
-    /***  write your code here ***/
-    //alert("Message reveived");
-    console.log(event.data);
+    console.log(msg);
+    console.log(msgType);
 
+    switch (msgType){
+        case "newBid":
+            onNewBidMessage(msg);
+            break;
+        default:
+            console.log("Unknown message type: " + msgType);
+            break;
+    }
 };
+
+function onNewBidMessage(msg){
+
+    var newPrice = msg.price;
+    var bidder = msg.bidder;
+    var productID = msg.product;
+
+    console.log("id: " + productID);
+
+    var productDiv = $('[data-product-id='+productID+']');
+    productDiv.find('.product-price').text(newPrice + " €");
+    productDiv.find('.product-highest').text(bidder);
+    
+    productDiv.effect("highlight", {}, 3000);
+
+
+}

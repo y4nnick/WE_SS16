@@ -67,6 +67,10 @@ public class NotifierService {
     }
 
 
+    /**
+     * Sends a new bid Notification to all logged in clients
+     * @param bid the new bid
+     */
     public static void sendNewBidNotificaiton(Bid bid){
 
         try{
@@ -84,6 +88,7 @@ public class NotifierService {
             json.addProperty("price",price);
             json.addProperty("bidder",bidder);
             json.addProperty("product",productID);
+            json.addProperty("msgType","newBid");
 
             //Send
             sendJsonToSessions(json,sessions);
