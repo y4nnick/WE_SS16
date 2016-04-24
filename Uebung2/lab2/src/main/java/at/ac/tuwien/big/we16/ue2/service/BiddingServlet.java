@@ -65,7 +65,6 @@ public class BiddingServlet extends HttpServlet {
 
             newBid = product.getTopBid();
 
-
             //add new auction to running auctions
             if (existingBid.isPresent()) {
                 existingBid.get().setPrice(newPrice);
@@ -79,7 +78,7 @@ public class BiddingServlet extends HttpServlet {
         }
 
         //Send notification to surpassed user
-        NotifierService.sendNewHighestBidNotification(oldHighestBidder);
+        NotifierService.sendNewHighestBidNotification(product.getLastBidOf(oldHighestBidder), oldHighestBidder);
 
         //Send notification to all users about the new Bid
         NotifierService.sendNewBidNotification(newBid);

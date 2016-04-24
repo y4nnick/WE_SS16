@@ -31,7 +31,7 @@ public class BidBot implements Runnable {
      */
     public void run() {
         Random rand = new Random();
-        Bid newBid;
+        Bid newBid, oldBid;
 
         for(Product p:this.products.values()) {
             if(p.isRunning() && rand.nextInt(3) == 2) {
@@ -48,7 +48,7 @@ public class BidBot implements Runnable {
 
                 //Send new highest Bid to surpassed user
                 if(oldHighestUser != null){
-                    NotifierService.sendNewHighestBidNotification(oldHighestUser);
+                    NotifierService.sendNewHighestBidNotification(p.getLastBidOf(oldHighestUser), oldHighestUser);
                 }
             }
         }

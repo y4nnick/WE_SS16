@@ -96,17 +96,17 @@ public class NotifierService {
      * Sends a new highest Bid notification to the surpassed bidder
      * @param surpassedBidder the surpassed bidder
      */
-    public static void sendNewHighestBidNotification(User surpassedBidder){
+    public static void sendNewHighestBidNotification(Bid oldBid, User surpassedBidder){
 
         try{
-
             //Get Session from surpassed bidder
             ArrayList<User> user = new ArrayList();
             user.add(surpassedBidder);
             ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
 
             //Get parameters
-            double newBalance = surpassedBidder.getBalance();
+            double newBalance = surpassedBidder.getBalance() + oldBid.getPrice();
+            surpassedBidder.setBalance(newBalance);
 
             //Build Json Object
             JsonObject json = new JsonObject();
@@ -115,7 +115,6 @@ public class NotifierService {
 
             //Send
             sendJsonToSessions(json,session);
-
         }catch (Exception e){
             printException(e);
         }
@@ -153,7 +152,7 @@ public class NotifierService {
                     else {
                         Bid last = product.getLastBidOf(u);
                         u.addLostAuction(last);
-                        u.setBalance(u.getBalance() + last.getPrice());
+                        //u.setBalance(u.getBalance() + last.getPrice());
                     }
                 }
 
@@ -189,7 +188,6 @@ public class NotifierService {
     public static void sendNewBidNotification(Bid bid){
 
         try{
-
             //Get Sessions from logged in users
             ArrayList<User> loggedInUsers = UserHandler.getLoggedInUsers();
             ArrayList<Session> sessions = NotifierService.getSessionsFromUsers(loggedInUsers);
