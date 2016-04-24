@@ -14,6 +14,12 @@ public class Bid {
         this.price = price;
     }
 
+    public Bid(Bid bid) {
+        product = bid.getProduct();
+        user = bid.getUser();
+        price = bid.getPrice();
+    }
+
     public User getUser() { return this.user; }
 
     public double getPrice() { return this.price; }

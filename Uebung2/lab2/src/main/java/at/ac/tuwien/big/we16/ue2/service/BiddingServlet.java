@@ -32,8 +32,9 @@ public class BiddingServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("currentSessionUser");
 
-        User oldHighestBidder = null;
-        Bid newBid = null;
+        User oldHighestBidder;
+        Bid newBid;
+        Bid oldTopBid = product.getTopBid() != null ? new Bid(product.getTopBid()) : null;
 
         if (newPrice > highestPrice) {
             // Check for existing bid
@@ -45,9 +46,6 @@ public class BiddingServlet extends HttpServlet {
 
             //set new balance
             double balanceUpdated = user.getBalance() - newPrice;
-            if (existingBid.isPresent()) {
-                balanceUpdated += existingBid.get().getPrice();
-            }
             if (balanceUpdated > 0) {
                 user.setBalance(balanceUpdated);
             } else {
@@ -56,7 +54,7 @@ public class BiddingServlet extends HttpServlet {
                 return;
             }
 
-            oldHighestBidder = (product.getTopBid() != null)?product.getTopBid().getUser():null;
+            oldHighestBidder = (oldTopBid != null) ? oldTopBid.getUser() : null;
 
             //set new highest bid
             Bid bid = product.addBid(user, newPrice);
@@ -77,14 +75,15 @@ public class BiddingServlet extends HttpServlet {
         }
 
         //Send notification to surpassed user
-        if(oldHighestBidder != null){
-            NotifierService.sendNewHighestBidNotification(product.getLastBidOf(oldHighestBidder), oldHighestBidder);
+        if (oldHighestBidder != null) {
+            NotifierService.sendNewHighestBidNotification(oldTopBid, oldHighestBidder);
         }
 
         //Send notification to all users about the new Bid
         NotifierService.sendNewBidNotification(newBid);
 
         JsonObject json = new JsonObject();
+        System.out.println("C: " + user.getBalance());
         json.addProperty("balance", user.getBalance());
         json.addProperty("running", user.getRunningAuctions());
 
@@ -95,14 +94,15 @@ public class BiddingServlet extends HttpServlet {
 
     /**
      * Check if user has placed a bid on the product and update lists accordingly.
+     *
      * @param product The product.
-     * @param u The user.
+     * @param u       The user.
      */
     public static void auctionEnded(Product product, User u) {
-        if(product.isBidding(u)) {
+        if (product.isBidding(u)) {
             Bid top = product.getTopBid();
 
-            if(top.getUser().getId() == u.getId())
+            if (top.getUser().getId() == u.getId())
                 u.addWonAuction(top);
             else {
                 Bid last = product.getLastBidOf(u);

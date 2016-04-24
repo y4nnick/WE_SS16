@@ -100,7 +100,7 @@ public class NotifierService {
 
         try{
             //Get Session from surpassed bidder
-            ArrayList<User> user = new ArrayList();
+            ArrayList<User> user = new ArrayList<>();
             user.add(surpassedBidder);
             ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
 
