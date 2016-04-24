@@ -252,3 +252,31 @@ function updateSideBar(balance, running, won, lost){
         setTimeout(function() {$(".user-info-container").removeClass("highlightUpdate");}, 1200);
     }
 }
+
+
+// Show visited Products
+if(supportsLocalStorage()){
+
+    var products = localStorage["visited"];
+    if((typeof products) !== 'undefined') {
+
+        //Remove trailing comma and split
+        var products = products.replace(/(^,)|(,$)/g, "");
+        var productsArray = products.split(',');
+
+        console.log("loaded Products");
+        console.log(productsArray);
+
+        //Empty the list
+        $(".recently-viewed-headline").show();
+        var list = $(".recently-viewed-list");
+        list.show();
+        list.empty();
+
+        productsArray.forEach(function(p){
+            var values = p.split(":");
+            list.append('<li><a href="/details?id='+values[0]+'">'+values[1]+'</a></li>');
+        });
+
+    }
+}

@@ -61,5 +61,6 @@
 <script src="/scripts/jquery.js"></script>
 <script src="/scripts/framework.js"></script>
 <script src="/scripts/BiddingEventInit.js"></script>
+<script src="/scripts/storeVisit.js"></script>
 </body>
 </html>

@@ -91,7 +91,6 @@ public class NotifierService {
         this.executor.shutdown();
     }
 
-
     /**
      * Sends a new highest Bid notification to the surpassed bidder
      * @param surpassedBidder the surpassed bidder
