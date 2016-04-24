@@ -50,6 +50,7 @@ public final class InitListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
+        ServiceFactory.getNotifierService().stop();
         this.executor.shutdown();
     }
 }
