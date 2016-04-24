@@ -27,4 +27,20 @@ public class Bid {
     }
 
     public void setPrice(double newPrice) {this.price = newPrice; }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) return false;
+        if(!Bid.class.isAssignableFrom(obj.getClass())) return false;
+
+        final Bid otherBid = (Bid) obj;
+        if(this.getUser() == null || otherBid.getUser() == null) return false;
+        if(this.getProduct() == null || otherBid.getProduct() == null) return false;
+
+        if(this.getUser().getId() != otherBid.getUser().getId()) return false;
+        if(this.getProduct().getID() != otherBid.getProduct().getID()) return false;
+        if(this.getPrice() != otherBid.getPrice()) return false;
+
+        return true;
+    }
 }

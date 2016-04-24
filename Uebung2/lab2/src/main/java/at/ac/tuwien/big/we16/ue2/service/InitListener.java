@@ -41,6 +41,8 @@ public final class InitListener implements ServletContextListener {
             ConcurrentHashMap<Integer, Product> products = JSONDataLoader.getProducts();
             application.setAttribute("products", products);
 
+            // Generate users
+            UserHandler.generateUser();
             // Start BidBot every 10 seconds
             this.executor.scheduleAtFixedRate(new BidBot(products), 0, 10, TimeUnit.SECONDS);
         }

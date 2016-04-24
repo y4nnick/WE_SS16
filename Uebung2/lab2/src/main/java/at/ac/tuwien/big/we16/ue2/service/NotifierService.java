@@ -65,7 +65,7 @@ public class NotifierService {
      */
     public void register(Session socketSession, HttpSession httpSession) {
         if(DEBUG)System.out.println("Notifier Service in register");
-        UserHandler.generateUser();
+        //UserHandler.generateUser();
 
         //Make sure that no client gets registerd twice
         for(HttpSession httpSession1 : clients.values()){
@@ -143,6 +143,16 @@ public class NotifierService {
                 ArrayList<User> user = new ArrayList<>();
                 user.add(u);
                 ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
+
+                // Check if user has placed a bid on the product and update statistics accordingly
+                if(product.isBidding(u)) {
+                    Bid top = product.getTopBid();
+
+                    if(top.getUser().getId() == u.getId())
+                        u.addWonAuction(top);
+                    else
+                        u.addLostAuction(top);
+                }
 
                 //Get Parameters
                 balance = u.getBalance();

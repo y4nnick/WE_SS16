@@ -40,14 +40,37 @@ public class User {
         return this.balance;
     }
 
+    /**
+     * Adds a new bid to the list of running auctions of this user.
+     * @param b The new bid.
+     */
+    public void addRunningAuction(Bid b) {
+        this.bids_running.add(b);
+    }
     public int getRunningAuctions() {
         return this.bids_running.size();
     }
 
+    /**
+     * Adds a running bid to the list of won auctions and removes it from the list of running auctions.
+     * @param b The running bid
+     */
+    public void addWonAuction(Bid b) {
+        this.bids_running.remove(b);
+        this.bids_won.add(b);
+    }
     public int getWonAuctions() {
         return this.bids_won.size();
     }
 
+    /**
+     * Adds a running bid to the list of lost auctions and removes it from the list of running auctions.
+     * @param b The running bid
+     */
+    public void addLostAuction(Bid b) {
+        this.bids_running.remove(b);
+        this.bids_lost.add(b);
+    }
     public int getLostAuctions() {
         return this.bids_lost.size();
     }

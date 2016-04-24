@@ -41,7 +41,24 @@ public class Product {
 
     public Bid getTopBid() { return this.highestBid; }
 
+    /**
+     * Checks whether the given user is bidding on this product.
+     * @param u The user.
+     * @return True, if the user has placed a bid on this product.
+     */
+    public boolean isBidding(User u) {
+        for(Bid b:this.bids) {
+            if(b.getUser().getId() == u.getId())
+                return true;
+        }
+
+        return false;
+    }
+
     public void addBid(Bid b) {
+        if(b.getUser() == null) {
+            System.out.println("EYO");
+        }
         this.highestBid = b;
         this.bids.push(b);
     }
