@@ -6,6 +6,7 @@ import at.ac.tuwien.big.we16.ue2.model.User;
 import at.ac.tuwien.big.we16.ue2.productdata.JSONDataLoader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.sun.tools.corba.se.idl.constExpr.Not;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +33,9 @@ public class BiddingServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         User user = (User) session.getAttribute("currentSessionUser");
 
+        User oldHighestBidder = null;
+        Bid newBid = null;
+
         if (newPrice > highestPrice) {
             // Check for existing bid
             List<Bid> bidList = user.getRunningActionsList();
@@ -53,8 +57,13 @@ public class BiddingServlet extends HttpServlet {
                 return;
             }
 
+            oldHighestBidder = product.getTopBid().getUser();
+
             //set new highest bid
             product.addBid(user, newPrice);
+
+            newBid = product.getTopBid();
+
 
             //add new auction to running auctions
             if (existingBid.isPresent()) {
@@ -67,6 +76,12 @@ public class BiddingServlet extends HttpServlet {
             response.getWriter().write("Gebot ist nicht hoch genug.");
             return;
         }
+
+        //Send notification to surpassed user
+        NotifierService.sendNewHighestBidNotification(oldHighestBidder);
+
+        //Send notification to all users about the new Bid
+        NotifierService.sendNewBidNotification(newBid);
 
         JsonObject json = new JsonObject();
         json.addProperty("balance", user.getBalance());

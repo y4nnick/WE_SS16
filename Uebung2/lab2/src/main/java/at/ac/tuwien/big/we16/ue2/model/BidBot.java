@@ -2,6 +2,7 @@ package at.ac.tuwien.big.we16.ue2.model;
 
 import at.ac.tuwien.big.we16.ue2.productdata.UserHandler;
 import at.ac.tuwien.big.we16.ue2.service.NotifierService;
+import com.sun.tools.corba.se.idl.constExpr.Not;
 
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -34,11 +35,21 @@ public class BidBot implements Runnable {
 
         for(Product p:this.products.values()) {
             if(p.isRunning() && rand.nextInt(3) == 2) {
+
                 newBid = new Bid(p, UserHandler.getBidBot(), p.getPrice() + this.RAISE_BY);
 
-                NotifierService.sendNewBidNotification(newBid);
+                //Get old highest bidder
+                User oldHighestUser = (p.getTopBid() != null)?p.getTopBid().getUser():null;
 
                 p.addBid(newBid);
+
+                //Send new Bid notification to all users
+                NotifierService.sendNewBidNotification(newBid);
+
+                //Send new highest Bid to surpassed user
+                if(oldHighestUser != null){
+                    NotifierService.sendNewHighestBidNotification(oldHighestUser);
+                }
             }
         }
     }
