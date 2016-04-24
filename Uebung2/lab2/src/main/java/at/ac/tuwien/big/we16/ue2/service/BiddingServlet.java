@@ -57,7 +57,7 @@ public class BiddingServlet extends HttpServlet {
                 return;
             }
 
-            oldHighestBidder = product.getTopBid().getUser();
+            oldHighestBidder = (product.getTopBid() != null)?product.getTopBid().getUser():null;
 
             //set new highest bid
             Bid bid = product.addBid(user, newPrice);
@@ -78,7 +78,9 @@ public class BiddingServlet extends HttpServlet {
         }
 
         //Send notification to surpassed user
-        NotifierService.sendNewHighestBidNotification(product.getLastBidOf(oldHighestBidder), oldHighestBidder);
+        if(oldHighestBidder != null){
+            NotifierService.sendNewHighestBidNotification(product.getLastBidOf(oldHighestBidder), oldHighestBidder);
+        }
 
         //Send notification to all users about the new Bid
         NotifierService.sendNewBidNotification(newBid);

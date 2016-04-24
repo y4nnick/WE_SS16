@@ -223,7 +223,7 @@ public class NotifierService {
         for(User u : users){
             for (Session session : clients.keySet()) {
                 HttpSession httpSession = clients.get(session);
-                if(u.getHttpSession().equals(httpSession)){
+                if(u.getHttpSession() != null && u.getHttpSession().equals(httpSession)){
                     sessions.add(session);
                 }
             }
