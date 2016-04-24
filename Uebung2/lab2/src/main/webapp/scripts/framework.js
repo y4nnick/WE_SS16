@@ -22,7 +22,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 
-var DEBUG = true;
+var DEBUG = false;
 var idparam = getUrlParameter("id");
 var inDetailView = ((typeof idparam) !== 'undefined');
 
@@ -262,9 +262,6 @@ if(supportsLocalStorage()){
         //Remove trailing comma and split
         var products = products.replace(/(^,)|(,$)/g, "");
         var productsArray = products.split(',');
-
-        console.log("loaded Products");
-        console.log(productsArray);
 
         if(products.length == 0){
 
