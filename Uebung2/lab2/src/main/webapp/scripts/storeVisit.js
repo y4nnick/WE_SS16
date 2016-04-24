@@ -23,6 +23,9 @@ $(document).ready(function () {
         }else{
             console.log("No product ID in details view");
         }
+    }else{
+        $(".recently-viewed-headline").hide();
+        $(".recently-viewed-list").hide();
     }
     
 });

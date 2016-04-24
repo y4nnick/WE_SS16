@@ -266,16 +266,29 @@ if(supportsLocalStorage()){
         console.log("loaded Products");
         console.log(productsArray);
 
-        //Empty the list
-        $(".recently-viewed-headline").show();
-        var list = $(".recently-viewed-list");
-        list.show();
-        list.empty();
+        if(products.length == 0){
 
-        productsArray.forEach(function(p){
-            var values = p.split(":");
-            list.append('<li><a href="/details?id='+values[0]+'">'+values[1]+'</a></li>');
-        });
+            $(".recently-viewed-headline").hide();
+            $(".recently-viewed-list").hide();
 
+        }else{
+
+            //Empty the list
+            $(".recently-viewed-headline").show();
+            var list = $(".recently-viewed-list");
+            list.show();
+            list.empty();
+
+            productsArray.forEach(function(p){
+                var values = p.split(":");
+                list.append('<li><a href="/details?id='+values[0]+'">'+values[1]+'</a></li>');
+            });
+        }
+    }else{
+        $(".recently-viewed-headline").hide();
+        $(".recently-viewed-list").hide();
     }
+}else{
+    $(".recently-viewed-headline").hide();
+    $(".recently-viewed-list").hide();
 }
