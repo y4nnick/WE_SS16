@@ -40,7 +40,7 @@
             </div>
             <p class="detail-time" style="display:${(!product.isRunning())?'none':'block'}">Restzeit: <span data-end-time="${product.getAuctionEndString()}" class="detail-rest-time js-time-left"></span>
             </p>
-            <form class="bid-form" method="post" action="" style="display:${(!product.isRunning())?'none':'flex'}">
+            <form class="bid-form" method="post" style="display:${(!product.isRunning())?'none':'flex'}">
 
                 <!--<label class="bid-form-field" id="highest-price"></label>-->
                 <label class="bid-form-field" id="highest-price">
