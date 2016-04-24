@@ -1,9 +1,7 @@
 package at.ac.tuwien.big.we16.ue2.model;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by mstrasser on 4/12/16.
@@ -14,7 +12,7 @@ public class Product {
     private String img;
     private int year;
     private Bid highestBid = null;
-    private Stack<Bid> bids = new Stack<Bid>();
+    private Deque<Bid> bids = new ArrayDeque<Bid>();
 
     private Date auctionEnd;
     private boolean isRunning = true;
@@ -53,6 +51,22 @@ public class Product {
         }
 
         return false;
+    }
+
+    /**
+     * Returns the last bid that has been placed by the specified user.
+     * @param u The user.
+     * @return The last bid of the user.
+     */
+    public Bid getLastBidOf(User u) {
+        if(u == null) return null;
+
+        for(Bid b:this.bids) {
+            if(b.getUser().getId() == u.getId())
+                return b;
+        }
+
+        return null;
     }
 
     public void addBid(Bid b) {

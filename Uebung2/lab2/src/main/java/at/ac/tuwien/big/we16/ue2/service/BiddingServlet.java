@@ -41,7 +41,7 @@ public class BiddingServlet extends HttpServlet {
                     .findAny();
 
             //set new balance
-            float balanceUpdated = user.getBalance() - newPrice;
+            double balanceUpdated = user.getBalance() - newPrice;
             if (existingBid.isPresent()) {
                 balanceUpdated += existingBid.get().getPrice();
             }

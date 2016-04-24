@@ -18,7 +18,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private float balance;
+    private double balance;
     private List<Bid> bids_running = new LinkedList<Bid>();
     private List<Bid> bids_won = new LinkedList<Bid>();
     private List<Bid> bids_lost = new LinkedList<Bid>();
@@ -36,7 +36,7 @@ public class User {
         return this.name;
     }
 
-    public float getBalance() {
+    public double getBalance() {
         return this.balance;
     }
 
@@ -111,7 +111,7 @@ public class User {
         return this.httpSession != null;
     }
 
-    public void setBalance(float newBalance) {this.balance = newBalance; }
+    public void setBalance(double newBalance) {this.balance = newBalance; }
 
     public List<Bid> getRunningActionsList(){return bids_running; }
 }

@@ -106,7 +106,7 @@ public class NotifierService {
             ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
 
             //Get parameters
-            float newBalance = surpassedBidder.getBalance();
+            double newBalance = surpassedBidder.getBalance();
 
             //Build Json Object
             JsonObject json = new JsonObject();
@@ -134,7 +134,7 @@ public class NotifierService {
 
             //Parameter
             int productID = product.getID();
-            float balance;
+            double balance;
             int runningAuctions, lostAuctions, wonAuctions;
 
             for(User u : loggedInUsers){
@@ -150,8 +150,11 @@ public class NotifierService {
 
                     if(top.getUser().getId() == u.getId())
                         u.addWonAuction(top);
-                    else
+                    else {
                         u.addLostAuction(top);
+                        Bid last = product.getLastBidOf(u);
+                        u.setBalance(u.getBalance() + last.getPrice());
+                    }
                 }
 
                 //Get Parameters
