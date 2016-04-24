@@ -56,9 +56,6 @@ public class Product {
     }
 
     public void addBid(Bid b) {
-        if(b.getUser() == null) {
-            System.out.println("EYO");
-        }
         this.highestBid = b;
         this.bids.push(b);
     }

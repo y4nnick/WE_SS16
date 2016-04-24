@@ -30,7 +30,7 @@ public final class InitListener implements ServletContextListener {
     @Override
     /**
      * When called and products are not loaded, all products will be loaded with JSONDataLoader and added as an
-     * application-wide variable. Then the BidBot will be started with the loaded products.
+     * application-wide variable. Then the BidBot will be started with the loaded products. Also the user get generated.
      */
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext application = servletContextEvent.getServletContext();
