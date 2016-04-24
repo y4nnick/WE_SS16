@@ -74,9 +74,10 @@ public class Product {
         this.bids.push(b);
     }
 
-    public void addBid(User u, float price) {
+    public Bid addBid(User u, float price) {
         Bid b = new Bid(this, u, price);
         addBid(b);
+        return b;
     }
 
     public double getPrice() {

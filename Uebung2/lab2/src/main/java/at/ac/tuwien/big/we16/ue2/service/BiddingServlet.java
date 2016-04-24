@@ -60,7 +60,8 @@ public class BiddingServlet extends HttpServlet {
             oldHighestBidder = product.getTopBid().getUser();
 
             //set new highest bid
-            product.addBid(user, newPrice);
+            Bid bid = product.addBid(user, newPrice);
+            NotifierService.sendNewBidNotification(bid);
 
             newBid = product.getTopBid();
 

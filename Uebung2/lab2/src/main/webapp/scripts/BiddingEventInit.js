@@ -17,6 +17,8 @@
  *     + Name des Höchstbietenden & sein Gebot an ALLE Clients
  *     + Wird die Person überboten --> Gutschreibung des Betrags
  *         am Server & Aktualiserung der Sidebar
+ *
+ * Highest Bid ständig dort stehen haben
  */
 
 
