@@ -206,7 +206,6 @@ function onNewBidMessage(msg){
         setTimeout(function() {productDiv.find(".product").removeClass("highlightUpdate");}, 1200);
 
     }else if(idparam == productID){     //Check if details view of product
-
         //Set Price and new highest bidder
         $('.highest-bid').text(newPrice + "€");
         $('.highest-bidder').text(bidder);
@@ -214,8 +213,8 @@ function onNewBidMessage(msg){
         //Animate update
         $(".bid-form").addClass("highlightUpdate");
         setTimeout(function() {$(".bid-form").removeClass("highlightUpdate");}, 1200);
-
     }
+
 }
 
 /**

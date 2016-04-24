@@ -23,8 +23,9 @@ $(document).ready(function () {
             success: function (response) {
                 var data = JSON.parse(response);
                 $(".bid-error").hide();
+                $('.highest-bid').text(data.price + "€");
+                $('.highest-bidder').text(data.bidder);
 
-                $highestPrice.html('<label> Highest:' + data.price + "€" + '</label>');
                 $(".balance").html(data.balance + "€");
                 $(".running-auctions-count").html(data.running);
             },
