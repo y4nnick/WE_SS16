@@ -151,8 +151,8 @@ public class NotifierService {
                     if(top.getUser().getId() == u.getId())
                         u.addWonAuction(top);
                     else {
-                        u.addLostAuction(top);
                         Bid last = product.getLastBidOf(u);
+                        u.addLostAuction(last);
                         u.setBalance(u.getBalance() + last.getPrice());
                     }
                 }
