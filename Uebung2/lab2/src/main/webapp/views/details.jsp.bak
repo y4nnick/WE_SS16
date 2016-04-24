@@ -30,7 +30,7 @@
         <div data-product-id="ce510a73-408f-489c-87f9-94817d845773" class="details-data">
             <h2 class="main-headline" id="productheadline">${product.getName()}</h2>
 
-            <div class="auction-expired-text" style="display:${(product.isRunning())?'none':'block'}">
+            <div class="auction-expired-text" style="display:none">
                 <p>
                     Diese Auktion ist bereits abgelaufen.
                     Das Produkt wurde um
@@ -38,9 +38,9 @@
                     <span class="highest-bidder">${product.getHighestBidName()}</span> verkauft.
                 </p>
             </div>
-            <p class="detail-time" style="display:${(!product.isRunning())?'none':'block'}">Restzeit: <span data-end-time="${product.getAuctionEndString()}" class="detail-rest-time js-time-left"></span>
+            <p class="detail-time">Restzeit: <span data-end-time="${product.getAuctionEndString()}" class="detail-rest-time js-time-left"></span>
             </p>
-            <form class="bid-form" method="post" style="display:${(!product.isRunning())?'none':'flex'}">
+            <form class="bid-form" method="post" action="">
 
                 <!--<label class="bid-form-field" id="highest-price"></label>-->
                 <label class="bid-form-field" id="highest-price">
@@ -48,7 +48,7 @@
                     <span class="highest-bidder">${product.getHighestBidName()}</span>
                 </label>
 
-                <label class="accessibility" for="new-price">Gebot: </label>
+                <label class="accessibility" for="new-price"></label>
                 <input type="number" step="0.01" min="0" id="new-price" class="bid-form-field form-input"
                        name="new-price" required>
                 <p class="bid-error">Es gibt bereits ein höheres Gebot oder der Kontostand ist zu niedrig.</p>
@@ -61,6 +61,5 @@
 <script src="/scripts/jquery.js"></script>
 <script src="/scripts/framework.js"></script>
 <script src="/scripts/BiddingEventInit.js"></script>
-<script src="/scripts/storeVisit.js"></script>
 </body>
 </html>

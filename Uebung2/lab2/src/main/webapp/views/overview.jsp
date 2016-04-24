@@ -33,7 +33,7 @@
             <c:forEach items="${products.values()}" var="product">
                 <div class="product-outer transition" data-product-id="${product.getID()}">
                     <a href="details?id=${product.getID()}" class="product transition ${(product.isRunning())?"":"expired"} <%--expired--%> " title="Mehr Informationen zu ${product.getName()}">
-                        <img class="product-image" src="images/${product.getImg()}" alt="">
+                        <img class="product-image" src="images/${product.getImg()}" alt="product.getName()">
                         <dl class="product-properties properties">
                             <dt>Bezeichnung</dt>
                             <dd class="product-name">${product.getName()}</dd>
