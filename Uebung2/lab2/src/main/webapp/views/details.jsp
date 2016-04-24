@@ -42,7 +42,11 @@
             </p>
             <form class="bid-form" method="post" action="">
 
-                <label class="bid-form-field" id="highest-price"></label>
+                <!--<label class="bid-form-field" id="highest-price"></label>-->
+                <label class="bid-form-field" id="highest-price">
+                    <span class="highest-bid">${product.getPrice()} €</span>
+                    <span class="highest-bidder">${product.getHighestBidName()}</span>
+                </label>
 
                 <label class="accessibility" for="new-price"></label>
                 <input type="number" step="0.01" min="0" id="new-price" class="bid-form-field form-input"
