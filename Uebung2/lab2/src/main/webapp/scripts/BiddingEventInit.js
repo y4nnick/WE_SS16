@@ -24,7 +24,7 @@ $(document).ready(function () {
                 var data = JSON.parse(response);
                 $(".bid-error").hide();
 
-                $highestPrice.html('<label> Highest:' + data.price + '</label>');
+                $highestPrice.html('<label> Highest:' + data.price + "€" + '</label>');
                 $(".balance").html(data.balance + "€");
                 $(".running-auctions-count").html(data.running);
             },
