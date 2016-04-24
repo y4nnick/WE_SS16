@@ -6,7 +6,6 @@ import at.ac.tuwien.big.we16.ue2.model.User;
 import at.ac.tuwien.big.we16.ue2.productdata.JSONDataLoader;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.sun.tools.corba.se.idl.constExpr.Not;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -90,5 +89,23 @@ public class BiddingServlet extends HttpServlet {
         json.addProperty("price", Double.toString(product.getPrice()));
 
         response.getWriter().write(json.toString());
+    }
+
+    /**
+     * Check if user has placed a bid on the product and update lists accordingly.
+     * @param product The product.
+     * @param u The user.
+     */
+    public static void auctionEnded(Product product, User u) {
+        if(product.isBidding(u)) {
+            Bid top = product.getTopBid();
+
+            if(top.getUser().getId() == u.getId())
+                u.addWonAuction(top);
+            else {
+                Bid last = product.getLastBidOf(u);
+                u.addLostAuction(last);
+            }
+        }
     }
 }

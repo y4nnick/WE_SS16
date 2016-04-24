@@ -143,18 +143,7 @@ public class NotifierService {
                 user.add(u);
                 ArrayList<Session> session = NotifierService.getSessionsFromUsers(user);
 
-                // Check if user has placed a bid on the product and update statistics accordingly
-                if(product.isBidding(u)) {
-                    Bid top = product.getTopBid();
-
-                    if(top.getUser().getId() == u.getId())
-                        u.addWonAuction(top);
-                    else {
-                        Bid last = product.getLastBidOf(u);
-                        u.addLostAuction(last);
-                        //u.setBalance(u.getBalance() + last.getPrice());
-                    }
-                }
+                BiddingServlet.auctionEnded(product, u);
 
                 //Get Parameters
                 balance = u.getBalance();
