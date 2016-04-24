@@ -2,26 +2,6 @@
  * Created by Butterkeks on 23/04/16.
  */
 
-/*TODO:
- * Formular auf Detailseite mit Ajax abschicken -check
- * Validierung am Server, ob Gebot höher als aktuelles Gebot ist
- *     if false --> Fehlermeldung auf Detailseite -check
- *     if true ---> Kontostand und Aktionszähler aktualisiert & mit
- *         mit neuem Gebot am Server gespeichert -check
- * AKTIONSSZÄHLER: nur bei der ersten Teilnahme erhöht, -check nach
- *     Ablauf der Aktion Aktionszähler verringert & Gewinn-/Verlustzähler
- *     erhöht
- * Ajax-Response: Anzahl laufender Aktionen, Kontostand
- * Aktualisierung der Daten auf der Detailseite
- * WEBSOCKET KOMPONENTE:
- *     + Name des Höchstbietenden & sein Gebot an ALLE Clients
- *     + Wird die Person überboten --> Gutschreibung des Betrags
- *         am Server & Aktualiserung der Sidebar
- *
- * Highest Bid ständig dort stehen haben
- */
-
-
 $(document).ready(function () {
 
     var $newPrice = $('#new-price');
