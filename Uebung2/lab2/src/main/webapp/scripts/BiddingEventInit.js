@@ -25,7 +25,7 @@ $(document).ready(function () {
                 $(".bid-error").hide();
                 $('.highest-bid').text(data.price + "€");
                 $('.highest-bidder').text(data.bidder);
-                $(".bid-form-field").val("");
+                $(".bid-form-field.form-input").val("");
 
                 $(".balance").html(data.balance + "€");
                 $(".running-auctions-count").html(data.running);
