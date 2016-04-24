@@ -30,7 +30,7 @@
         <div data-product-id="ce510a73-408f-489c-87f9-94817d845773" class="details-data">
             <h2 class="main-headline" id="productheadline">${product.getName()}</h2>
 
-            <div class="auction-expired-text" style="display:none">
+            <div class="auction-expired-text" style="display:${(product.isRunning())?'none':'block'}">
                 <p>
                     Diese Auktion ist bereits abgelaufen.
                     Das Produkt wurde um
@@ -38,9 +38,9 @@
                     <span class="highest-bidder">${product.getHighestBidName()}</span> verkauft.
                 </p>
             </div>
-            <p class="detail-time">Restzeit: <span data-end-time="${product.getAuctionEndString()}" class="detail-rest-time js-time-left"></span>
+            <p class="detail-time" style="display:${(!product.isRunning())?'none':'block'}">Restzeit: <span data-end-time="${product.getAuctionEndString()}" class="detail-rest-time js-time-left"></span>
             </p>
-            <form class="bid-form" method="post" action="">
+            <form class="bid-form" method="post" action="" style="display:${(!product.isRunning())?'none':'block'}">
 
                 <!--<label class="bid-form-field" id="highest-price"></label>-->
                 <label class="bid-form-field" id="highest-price">
