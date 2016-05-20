@@ -5,6 +5,7 @@ public abstract class ServiceFactory {
     private static NotifierService notifierService;
     private static ComputerUserService computerUserService;
     private static UserService userService;
+    private static BIGBoardService bigBoardService;
 
     public static ProductService getProductService() {
         if (productService == null) {
@@ -35,5 +36,13 @@ public abstract class ServiceFactory {
             userService = new UserService();
         }
         return userService;
+    }
+
+    public static BIGBoardService getBIGBoardService() {
+        if (bigBoardService == null) {
+            bigBoardService = new BIGBoardService("https://lectures.ecosio.com/b3a/api/v1/bids");
+        }
+
+        return bigBoardService;
     }
 }
