@@ -40,7 +40,7 @@ public class BIGBoardService {
     /**
      * Post a sale to the BIG Board.
      * @return The UUID of the BIG Board entry.
-     * TODO: Remove debug flag
+     * TODO: Remove debug flag & check logging
      */
     public String postToBoard(User u, Product p, boolean debug) {
         try {
