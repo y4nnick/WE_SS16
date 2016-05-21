@@ -5,27 +5,35 @@ import at.ac.tuwien.big.we16.ue3.model.Bid;
 import at.ac.tuwien.big.we16.ue3.model.Product;
 import at.ac.tuwien.big.we16.ue3.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class ProductService {
 
+    private static final String PERSISTENCE_UNIT_NAME = "defaultPersistenceUnit";
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+
+    private EntityManager em;
+
     public Collection<Product> getAllProducts() {
-
-        //TODO: read from db
-
-        return null;
+        em = factory.createEntityManager();
+        Query query = em.createQuery("SELECT p FROM Product p");
+        return (Collection<Product>) query.getResultList();
     }
 
     public Product getProductById(String id) throws ProductNotFoundException {
-
-       //TODO: read from db
-
-        return null;
+        em = factory.createEntityManager();
+        return em.find(Product.class, id);
     }
 
-    //TODO: write changed users and products to db
     public Collection<Product> checkProductsForExpiration() {
+        em = factory.createEntityManager();
+        em.getTransaction().begin();
+
         Collection<Product> newlyExpiredProducts = new ArrayList<>();
         for (Product product : this.getAllProducts()) {
             if (!product.hasExpired() && product.hasAuctionEnded()) {
@@ -41,10 +49,17 @@ public class ProductService {
                         else {
                             user.incrementLostAuctionsCount();
                         }
+                        em.merge(user);
                     }
                 }
+
+                em.merge(product);
             }
         }
+
+        em.getTransaction().commit();
+        em.close();
+
         return newlyExpiredProducts;
     }
 }

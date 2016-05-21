@@ -1,9 +1,22 @@
 package at.ac.tuwien.big.we16.ue3.model;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class RelatedProduct {
 
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String name;
+
+    @ManyToOne
     private Product product;
 
     public String getId() {

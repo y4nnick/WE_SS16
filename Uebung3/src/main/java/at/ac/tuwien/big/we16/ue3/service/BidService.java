@@ -6,9 +6,17 @@ import at.ac.tuwien.big.we16.ue3.model.Bid;
 import at.ac.tuwien.big.we16.ue3.model.Product;
 import at.ac.tuwien.big.we16.ue3.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.math.BigDecimal;
 
 public class BidService {
+
+    private static final String PERSISTENCE_UNIT_NAME = "defaultPersistenceUnit";
+    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+
+    private EntityManager em = factory.createEntityManager();
 
     public void makeBid(User user, Product product, int centAmount) throws InvalidBidException, UserNotFoundException {
         if (product.hasAuctionEnded() || !product.isValidBidAmount(centAmount) || !user.hasSufficientBalance(centAmount)) {
@@ -27,7 +35,7 @@ public class BidService {
 
 
         int decreaseAmount = centAmount;
-        User highestBidder = null;
+        User highestBidder = (product!=null&&product.getHighestBid() != null)?product.getHighestBid().getUser():null;
 
         if (product.hasBids()) {
             if (product.getHighestBid().isBy(user)) {
@@ -35,8 +43,16 @@ public class BidService {
                 decreaseAmount = centAmount - product.getHighestBid().getAmount();
             }
             else {
-                // TODO reimburse current highest bidder
-                ServiceFactory.getNotifierService().notifyReimbursement(highestBidder);
+
+                if(highestBidder != null){
+                    int oldAmount = highestBidder.getBalance();
+                    int newAmount = oldAmount + product.getHighestBid().getAmount();
+                    highestBidder.setBalance(newAmount);
+                    em.merge(highestBidder);
+
+                    ServiceFactory.getNotifierService().notifyReimbursement(highestBidder);
+                }
+
             }
         }
 
@@ -46,8 +62,16 @@ public class BidService {
 
         user.decreaseBalance(decreaseAmount);
         Bid bid = new Bid(centAmount, user);
+        bid.setProduct(product);
 
-        //TODO: write to db
+        em = factory.createEntityManager();
+        em.getTransaction().begin();
+
+        em.persist(bid);
+        em.merge(user);
+
+        em.getTransaction().commit();
+        em.close();
 
         ServiceFactory.getNotifierService().notifyAllAboutBid(bid);
     }

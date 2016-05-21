@@ -1,23 +1,39 @@
 package at.ac.tuwien.big.we16.ue3.model;
 
 import at.ac.tuwien.big.we16.ue3.exception.InvalidBidException;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Entity
 public class Product {
+
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+
     private String name;
     private String image;
     private String imageAlt;
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date auctionEnd;
+
     private ProductType type;
+
     private int year;
     private String producer;
     private boolean expired;
+
+    @OneToMany(mappedBy = "product")
     private List<RelatedProduct> relatedProducts;
+
+    @OneToMany(mappedBy = "product")
     private List<Bid> bids;
 
     public Bid getHighestBid() {
@@ -105,4 +121,39 @@ public class Product {
         return relatedProducts;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setImageAlt(String imageAlt) {
+        this.imageAlt = imageAlt;
+    }
+
+    public void setAuctionEnd(Date auctionEnd) {
+        this.auctionEnd = auctionEnd;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    public void setRelatedProducts(List<RelatedProduct> relatedProducts) {
+        this.relatedProducts = relatedProducts;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
 }

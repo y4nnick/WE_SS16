@@ -1,11 +1,30 @@
 package at.ac.tuwien.big.we16.ue3.model;
 
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Bid {
 
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+
     private int amount;
+
+    @ManyToOne
     private User user;
+
+    @ManyToOne
     private Product product;
+
+    public Bid(){}
 
     public Bid(int centAmount, User user) {
         amount = centAmount;
