@@ -26,31 +26,36 @@
                 <label class="form-label" for="firstname-input">
                     Vorname *
                 </label>
-                <input type="text" name="firstname" id="firstname-input" class="form-input">
+                <input type="text" name="firstname" id="firstname-input" class="form-input" value="${request.getParameter('firstname')}">
+                <div class="error-text">${messages.firstname}</div>
             </div>
             <div class="form-row">
                 <label class="form-label" for="lastname-input">
                     Nachname *
                 </label>
-                <input type="text" name="lastname" id="lastname-input" class="form-input">
+                <input type="text" name="lastname" id="lastname-input" class="form-input" value="${request.getParameter('lastname')}">
+                <div class="error-text">${messages.lastname}</div>
             </div>
             <div class="form-row">
                 <label class="form-label" for="dateofbirth-input">
                     Geburtsdatum *
                 </label>
-                <input type="text" name="dateofbirth" id="dateofbirth-input" class="form-input">
+                <input type="date" name="dateofbirth" id="dateofbirth-input" class="form-input">
+                <div class="error-text">${messages.date}</div>
             </div>
             <div class="form-row">
                 <label class="form-label" for="email-input">
                     Email *
                 </label>
-                <input type="text" name="email" id="email-input" class="form-input">
+                <input type="text" name="email" id="email-input" class="form-input" value="${request.getParameter('email')}">
+                <div class="error-text">${messages.email}</div>
             </div>
             <div class="form-row">
                 <label class="form-label" for="password-input">
                     Passwort *
                 </label>
                 <input type="password" name="password" id="password-input" class="form-input">
+                <div class="error-text">${messages.password}</div>
             </div>
         </fieldset>
 
@@ -60,13 +65,13 @@
                 <label class="form-label" for="streetAndNumber-input">
                     Straße/Hausnummer
                 </label>
-                <input type="text" name="streetAndNumber" id="streetAndNumber-input" class="form-input">
+                <input type="text" name="streetAndNumber" id="streetAndNumber-input" class="form-input" value="${request.getParameter('streetAndNumber')}">
             </div>
             <div class="form-row">
                 <label class="form-label" for="postcodeAndCity-input">
                     PLZ/Ort
                 </label>
-                <input type="text" name="postcodeAndCity" id="postcodeAndCity-input" class="form-input">
+                <input type="text" name="postcodeAndCity" id="postcodeAndCity-input" class="form-input" value="${request.getParameter('postcodeAndCity')}">
             </div>
             <div class="form-row">
                 <label class="form-label" for="country-input">
