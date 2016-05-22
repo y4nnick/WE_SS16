@@ -23,6 +23,8 @@ public class BidService {
             throw new InvalidBidException();
         }
 
+        em = factory.createEntityManager();
+
         // possible cases:
         // * product has no bids
         //   -> decrease balance by total, increment running

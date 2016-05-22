@@ -162,7 +162,7 @@ public class DataGenerator {
                 query.addWhereClause(DBPediaOWL.director, producer);
             }else if(p.getType().equals(ProductType.ALBUM)){
                 query.addWhereClause(RDF.type, DBPediaOWL.Album);
-                query.addWhereClause(DBPediaOWL.band,producer);
+                query.addWhereClause(DBPediaOWL.artist,producer);
             }else if(p.getType().equals(ProductType.BOOK)){
                 query.addWhereClause(RDF.type, DBPediaOWL.Book);
                 query.addWhereClause(DBPediaOWL.author, producer);
