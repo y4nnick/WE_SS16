@@ -7,6 +7,7 @@ import at.ac.tuwien.big.we16.ue3.model.User;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
+import javax.xml.ws.Service;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -49,6 +50,15 @@ public class NotifierService {
             Collection<Product> newlyExpiredProducts = ServiceFactory.getProductService().checkProductsForExpiration();
             if (!newlyExpiredProducts.isEmpty()) {
                 NotifierService.this.sendToAllSockets(new ExpiredProductsVisitor(newlyExpiredProducts));
+
+                for(Product p:newlyExpiredProducts) {
+                    Bid highestBid = p.getHighestBid();
+
+                    if(highestBid != null) {
+                        String id = ServiceFactory.getBIGBoardService().postToBoard(highestBid.getUser(), p);
+                        ServiceFactory.getTwitterService().postToTwitter(id, highestBid.getUser());
+                    }
+                }
             }
         }, 0, 1, TimeUnit.SECONDS);
     }
