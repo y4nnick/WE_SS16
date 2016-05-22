@@ -31,11 +31,11 @@ public class UserService {
         Validator validator = validationFactory.getValidator();
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(user);
 
-//        if (!user.overEighteen()) {
-//            ConstraintViolation<User> violation =
-//                    ConstraintViolationImpl.forBeanValidation("","you must be over 18", User.class, user, user, user.getDate(), PathImpl.createPathFromString("date"), null, null);
-//            constraintViolations.add((ConstraintViolation) violation);
-//        }
+        if (!user.overEighteen()) {
+            ConstraintViolation<User> violation =
+                    ConstraintViolationImpl.forBeanValidation("","you must be over 18", User.class, user, user, user.getDate(), PathImpl.createPathFromString("date"), null, null);
+            constraintViolations.add((ConstraintViolation) violation);
+        }
 
         if (constraintViolations.size() > 0) {
             throw new ValidationException(constraintViolations);

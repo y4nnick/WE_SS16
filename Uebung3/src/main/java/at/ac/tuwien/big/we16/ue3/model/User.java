@@ -61,8 +61,8 @@ public class User {
             return false;
         }
 
-        LocalDateTime now = LocalDateTime.now();
-        Date beforeDate = new Date(now.getDayOfMonth(), now.getMonthValue(), now.getYear() - 18);
+        Date currentDate = new Date();
+        Date beforeDate = new Date(currentDate.getYear() - 18, currentDate.getMonth() - 1, currentDate.getDate());
 
         return date.before(beforeDate);
     }

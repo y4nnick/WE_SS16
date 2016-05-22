@@ -40,7 +40,7 @@
                 <label class="form-label" for="dateofbirth-input">
                     Geburtsdatum *
                 </label>
-                <input type="date" name="dateofbirth" id="dateofbirth-input" class="form-input">
+                <input type="date" name="dateofbirth" id="dateofbirth-input" class="form-input" value="${request.getParameter('dateofbirth')}">
                 <div class="error-text">${messages.date}</div>
             </div>
             <div class="form-row">
