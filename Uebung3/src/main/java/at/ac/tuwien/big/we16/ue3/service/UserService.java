@@ -31,7 +31,7 @@ public class UserService {
         Validator validator = validationFactory.getValidator();
         Set<ConstraintViolation<Object>> constraintViolations = validator.validate(user);
 
-        if (!user.overEighteen()) {
+        if (!user.overEighteen() && user.getDate()!= null) {
             ConstraintViolation<User> violation =
                     ConstraintViolationImpl.forBeanValidation("","you must be over 18", User.class, user, user, user.getDate(), PathImpl.createPathFromString("date"), null, null);
             constraintViolations.add((ConstraintViolation) violation);

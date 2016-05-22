@@ -45,10 +45,7 @@ public class UserController {
         user.setEmail(request.getParameter("email"));
         user.setBalance(150000);
         user.setPassword(request.getParameter("password"));
-        String[] dateString = request.getParameter("dateofbirth").split("-");
-
-        Date dateDate = new Date(Integer.parseInt(dateString[0])-1900, Integer.parseInt(dateString[1])-1, Integer.parseInt(dateString[2]));
-        user.setDate(dateDate);
+        user.setDate(request.getParameter("dateofbirth"));
 
         try {
             this.userService.createUser(user);

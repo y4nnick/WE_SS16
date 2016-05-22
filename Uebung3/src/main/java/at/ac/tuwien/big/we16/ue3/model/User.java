@@ -20,13 +20,13 @@ public class User {
 
     private String salutation;
 
-    @NotNull(message = "First name is compulsory")
+    @NotNull(message = "First name is mandatory")
     private String firstname;
 
-    @NotNull(message = "Last name is compulsory")
+    @NotNull(message = "Last name is mandatory")
     private String lastname;
 
-    @NotNull(message = "E-Mail Address is compulsory")
+    @NotNull(message = "E-Mail Address is mandatory")
     @Pattern(regexp = "^\\S+@\\S+\\.\\S+$", message = "E-Mail format ist not valid 'abc@def.com'")
     private String email;
 
@@ -34,7 +34,7 @@ public class User {
     @Size(min = 4, max = 8, message = "the password must be between 4 and 8 characters long")
     private String password;
 
-    @NotNull
+    @NotNull(message = "Date of Birth is mandatory")
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dateOfBirth")
     @Past(message = "Date of Birth must be in the past")
@@ -54,7 +54,7 @@ public class User {
         this.balance = balance;
         this.email = email;
         this.password = password;
-        this.date = date;
+        setDate(date);
     }
     public boolean overEighteen(){
         if (date == null) {
@@ -137,8 +137,18 @@ public class User {
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        this.date = date.toString().isEmpty() ? null : date;
     }
+
+    public void setDate(String dateofbirth) {
+        String[] dateString = dateofbirth.split("-");
+        if (dateString.length == 3) {
+            date = new Date(Integer.parseInt(dateString[0])-1900, Integer.parseInt(dateString[1])-1, Integer.parseInt(dateString[2]));
+        } else {
+            date = null;
+        }
+    }
+
 
     public String getFirstname() {
         return firstname;
