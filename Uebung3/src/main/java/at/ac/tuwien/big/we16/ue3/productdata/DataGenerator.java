@@ -1,8 +1,20 @@
 package at.ac.tuwien.big.we16.ue3.productdata;
 
+import at.ac.tuwien.big.we.dbpedia.api.DBPediaService;
+import at.ac.tuwien.big.we.dbpedia.api.SelectQueryBuilder;
+import at.ac.tuwien.big.we.dbpedia.vocabulary.DBPedia;
+import at.ac.tuwien.big.we.dbpedia.vocabulary.DBPediaOWL;
 import at.ac.tuwien.big.we16.ue3.model.Product;
+import at.ac.tuwien.big.we16.ue3.model.ProductType;
+import at.ac.tuwien.big.we16.ue3.model.RelatedProduct;
 import at.ac.tuwien.big.we16.ue3.model.User;
+import at.ac.tuwien.big.we16.ue3.service.ProductService;
 import at.ac.tuwien.big.we16.ue3.service.UserService;
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.sparql.vocabulary.FOAF;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.hp.hpl.jena.vocabulary.RDFS;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +22,7 @@ import javax.persistence.Persistence;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 public class DataGenerator {
 
@@ -25,11 +35,12 @@ public class DataGenerator {
 
         em = factory.createEntityManager();
         em.getTransaction().begin();
-
         generateUserData();
         generateProductData();
-        insertRelatedProducts();
+        em.getTransaction().commit();
 
+        em.getTransaction().begin();
+        insertRelatedProducts();
         em.getTransaction().commit();
         em.close();
     }
@@ -66,6 +77,7 @@ public class DataGenerator {
             p.setProducer(book.getAuthor());
             p.setAuctionEnd(getRandomDateInFuture());
             p.setExpired(false);
+            p.setType(ProductType.BOOK);
 
             em.persist(p);
         }
@@ -80,6 +92,7 @@ public class DataGenerator {
             p.setProducer(movie.getDirector());
             p.setAuctionEnd(getRandomDateInFuture());
             p.setExpired(false);
+            p.setType(ProductType.FILM);
 
             em.persist(p);
         }
@@ -94,6 +107,7 @@ public class DataGenerator {
             p.setProducer(music.getArtist());
             p.setAuctionEnd(getRandomDateInFuture());
             p.setExpired(false);
+            p.setType(ProductType.ALBUM);
 
             em.persist(p);
         }
@@ -118,6 +132,51 @@ public class DataGenerator {
 
 
     private void insertRelatedProducts() {
-        // TODO load related products from dbpedia and write them to the database
+
+        // TODO log if not available
+
+        // Check if DBpedia is available
+        if(!DBPediaService.isAvailable()) {
+            return;
+        }
+
+        ProductService service = new ProductService();
+        Collection<Product> products = service.getAllProducts();
+
+        for (Product p : products){
+
+            Resource producer = DBPediaService.loadStatements(DBPedia.createResource(p.getProducer().replace(" ","_")));
+
+            Resource own = DBPediaService.loadStatements(DBPedia.createResource(p.getName().replace(" ","_")));
+
+            // Build SPARQL-query
+            SelectQueryBuilder query = DBPediaService.createQueryBuilder()
+                    .setLimit(5)
+                    .addPredicateExistsClause(FOAF.name)
+                    .addFilterClause(RDFS.label, Locale.GERMAN)
+                    .addFilterClause(RDFS.label, Locale.ENGLISH)
+                    .addMinusClause(DBPediaOWL.name, own);
+
+            if(p.getType().equals(ProductType.FILM)){
+                query.addWhereClause(RDF.type, DBPediaOWL.Film);
+                query.addWhereClause(DBPediaOWL.director, producer);
+            }else if(p.getType().equals(ProductType.ALBUM)){
+                query.addWhereClause(RDF.type, DBPediaOWL.Album);
+                query.addWhereClause(DBPediaOWL.band,producer);
+            }else if(p.getType().equals(ProductType.BOOK)){
+                query.addWhereClause(RDF.type, DBPediaOWL.Book);
+                query.addWhereClause(DBPediaOWL.author, producer);
+            }
+
+            Model related = DBPediaService.loadStatements(query.toQueryString());
+            List<String> names = DBPediaService.getResourceNames(related, Locale.GERMAN);
+
+            for(String name : names){
+                RelatedProduct relatedProduct = new RelatedProduct();
+                relatedProduct.setProduct(p);
+                relatedProduct.setName(name);
+                em.persist(relatedProduct);
+            }
+        }
     }
 }

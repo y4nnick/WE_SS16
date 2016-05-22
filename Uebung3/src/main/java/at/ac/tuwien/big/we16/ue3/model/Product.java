@@ -156,4 +156,8 @@ public class Product {
     public void setBids(List<Bid> bids) {
         this.bids = bids;
     }
+
+    public String getProducer() {
+        return producer;
+    }
 }

@@ -38,4 +38,8 @@ public class RelatedProduct {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
