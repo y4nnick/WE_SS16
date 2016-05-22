@@ -1,5 +1,6 @@
 package at.ac.tuwien.big.we16.ue3.service;
 
+import at.ac.tuwien.big.we16.ue3.model.User;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import twitter4j.Status;
@@ -8,6 +9,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -20,7 +22,6 @@ public class TwitterService {
     private String consumerSecret = "gaJDlW0vf7en46JwHAOkZsTHvtAiZ3QUd2mD1x26J9w";
     private String accessToken = "1366513208-MutXEbBMAVOwrbFmZtj1r4Ih2vcoHGHE2207002";
     private String accessTokenSecret = "RMPWOePlus3xtURWRVnv1TgrjTyK7Zk33evp4KKyA";
-    private String from = "API Tester";
     private Twitter twitter = null;
     private static final Logger logger = LogManager.getLogger("TwitterService");
 
@@ -39,8 +40,8 @@ public class TwitterService {
      * @param id The ID of the BIG Board entry.
      * @return The tweets content.
      */
-    public String postToTwitter(String id) {
-        TwitterStatusMessage msg = new TwitterStatusMessage(this.from, id, new Date());
+    public String postToTwitter(String id, User u) {
+        TwitterStatusMessage msg = new TwitterStatusMessage(u.getFullName(), id, new Date());
         try {
             Status status = this.twitter.updateStatus(msg.getTwitterPublicationString());
             return msg.getTwitterPublicationString();

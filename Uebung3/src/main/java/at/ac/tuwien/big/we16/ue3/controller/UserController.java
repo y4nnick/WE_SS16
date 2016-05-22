@@ -4,7 +4,6 @@ import at.ac.tuwien.big.we16.ue3.exception.ValidationException;
 import at.ac.tuwien.big.we16.ue3.model.User;
 import at.ac.tuwien.big.we16.ue3.service.AuthService;
 import at.ac.tuwien.big.we16.ue3.service.UserService;
-import com.sun.prism.shader.DrawCircle_Color_AlphaTest_Loader;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

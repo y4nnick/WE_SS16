@@ -6,6 +6,7 @@ public abstract class ServiceFactory {
     private static ComputerUserService computerUserService;
     private static UserService userService;
     private static BIGBoardService bigBoardService;
+    private static TwitterService twitterService;
 
     public static ProductService getProductService() {
         if (productService == null) {
@@ -44,5 +45,13 @@ public abstract class ServiceFactory {
         }
 
         return bigBoardService;
+    }
+
+    public static TwitterService getTwitterService() {
+        if(twitterService == null) {
+            twitterService = new TwitterService();
+        }
+
+        return twitterService;
     }
 }

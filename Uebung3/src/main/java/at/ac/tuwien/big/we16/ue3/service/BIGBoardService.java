@@ -17,7 +17,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * Created by mstrasser on 5/20/16.
@@ -37,27 +39,31 @@ public class BIGBoardService {
         this.url = url;
     }
 
+    public Collection<String> postToBoard(Collection<Product> products) {
+        Collection<String> ids = new LinkedList<String>();
+
+        for(Product product:products) {
+            if(product.getHighestBid() != null)
+                ids.add(this.postToBoard(product.getHighestBid().getUser(), product));
+        }
+
+        return ids;
+    }
     /**
      * Post a sale to the BIG Board.
      * @return The UUID of the BIG Board entry.
      * TODO: Remove debug flag & check logging
      */
-    public String postToBoard(User u, Product p, boolean debug) {
+    public String postToBoard(User u, Product p) {
         try {
             StringBuilder response = new StringBuilder();
             HttpURLConnection connection = this.buildConnection();
             JSONRequestAttributes attributes = new JSONRequestAttributes();
             attributes.date = Instant.now().toString();
 
-            if(debug) {
-                attributes.name = "Test Webservice";
-                attributes.product = "Testproduct";
-                attributes.price = "23.00";
-            } else {
-                attributes.name = u.getFullName();
-                attributes.product = p.getName();
-                attributes.price = String.valueOf(p.getHighestBid().getConvertedAmount());
-            }
+            attributes.name = u.getFullName();
+            attributes.product = p.getName();
+            attributes.price = String.valueOf(p.getHighestBid().getConvertedAmount());
 
             String jsonRequest = gson.toJson(attributes);
 
@@ -78,7 +84,7 @@ public class BIGBoardService {
 
             return jsonResponse.id;
         } catch (IOException e) {
-            BIGBoardService.logger.error("Error connecting to server or malformed content.");
+            System.out.println("Error connecting to server or malformed content.");
         }
 
         return null;

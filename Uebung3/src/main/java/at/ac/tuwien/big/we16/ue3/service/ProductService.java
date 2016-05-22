@@ -16,6 +16,7 @@ public class ProductService {
 
     private static final String PERSISTENCE_UNIT_NAME = "defaultPersistenceUnit";
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+    private static BIGBoardService bigBoardService = ServiceFactory.getBIGBoardService();
 
     private EntityManager em;
 
@@ -51,6 +52,7 @@ public class ProductService {
                         }
                         em.merge(user);
                     }
+
                 }
 
                 em.merge(product);
