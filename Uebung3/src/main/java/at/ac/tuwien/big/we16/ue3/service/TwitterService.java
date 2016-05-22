@@ -23,7 +23,6 @@ public class TwitterService {
     private String accessToken = "1366513208-MutXEbBMAVOwrbFmZtj1r4Ih2vcoHGHE2207002";
     private String accessTokenSecret = "RMPWOePlus3xtURWRVnv1TgrjTyK7Zk33evp4KKyA";
     private Twitter twitter = null;
-    private static final Logger logger = LogManager.getLogger("TwitterService");
 
     public TwitterService() {
         ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -46,9 +45,9 @@ public class TwitterService {
             Status status = this.twitter.updateStatus(msg.getTwitterPublicationString());
             return msg.getTwitterPublicationString();
         } catch (IllegalStateException e) {
-            TwitterService.logger.error("Something went wrong. Are your Twitter credentials set?");
+            System.out.println("Something went wrong. Are your Twitter credentials set?");
         } catch (TwitterException e) {
-            TwitterService.logger.error("Error publishing tweet.");
+            System.out.println("Error publishing tweet.");
         }
 
         return null;
