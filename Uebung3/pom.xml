@@ -69,6 +69,13 @@
             <artifactId>twitter4j-core</artifactId>
             <version>4.0.4</version>
         </dependency>
+        <dependency>
+            <groupId>at.ac.tuwien.big.we</groupId>
+            <artifactId>dbpedia</artifactId>
+            <scope>system</scope>
+            <version>1</version>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/big-dbpedia.jar</systemPath>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
