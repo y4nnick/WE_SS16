@@ -30,7 +30,7 @@ public class ProductController {
 
     public void getOverview(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("products", this.productService.getAllProducts());
-        request.getRequestDispatcher("/views/overview.jsp").forward(request, response);
+        request.getRequestDispatcher("/index.html/#/overview").forward(request, response);
     }
 
     public void getDetails(HttpServletRequest request, HttpServletResponse response, String id) throws ServletException, IOException, ProductNotFoundException {

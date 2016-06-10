@@ -48,6 +48,6 @@ public class AuthController {
     //TODO: Should not be necessary any more
     private void showLoginPage(HttpServletRequest request, HttpServletResponse response, boolean error) throws ServletException, IOException {
         request.setAttribute("error", error);
-        request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/#/login").forward(request, response);
     }
 }

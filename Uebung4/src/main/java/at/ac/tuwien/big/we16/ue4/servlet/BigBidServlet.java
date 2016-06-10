@@ -27,7 +27,7 @@ public class BigBidServlet extends HttpServlet {
     private static final String LOGIN_PATH = "/login";
     private static final String REGISTRATION_PATH = "/registration";
     private static final String LOGOUT_PATH = "/logout";
-    private static final String OVERVIEW_PATH = "/";
+    private static final String OVERVIEW_PATH = "/overview";
     private static final String UUID_REGEX = "([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})";
     private static final String DETAILS_PATH = "/product/" + UUID_REGEX;
     private static final String BID_PATH = "/product/" + UUID_REGEX + "/bid";
@@ -58,7 +58,15 @@ public class BigBidServlet extends HttpServlet {
         this.setLocale(request);
         this.noCacheHeaders(response);
 
-        try {
+
+      /* if(path.contains("#")){
+            return;
+         }*/
+
+      //  request.getRequestDispatcher("/#/"+path).forward(request, response);
+      //  return;
+
+       try {
             if (this.checkAuth(request, response, path)) {
                 return;
             }
